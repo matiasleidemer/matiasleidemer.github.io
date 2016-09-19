@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Matias Leidemer</title>
+    <link>https://matiasleidemer.github.io/</link>
+    <description>Recent content on Matias Leidemer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 18 Sep 2016 23:24:09 -0300</lastBuildDate>
+    <atom:link href="https://matiasleidemer.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>your new post</title>
+      <link>https://matiasleidemer.github.io/blog/your-new-post/</link>
+      <pubDate>Sun, 18 Sep 2016 23:24:09 -0300</pubDate>
+      
+      <guid>https://matiasleidemer.github.io/blog/your-new-post/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;puts &amp;quot;this is a test&amp;quot;
+
+if true
+  @var = 1
+else
+  @var = &amp;quot;2&amp;quot;
+end
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

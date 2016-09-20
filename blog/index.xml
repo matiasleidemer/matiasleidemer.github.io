@@ -6,25 +6,261 @@
     <description>Recent content in Blog on Matias Leidemer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 18 Sep 2016 23:24:09 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 19 Sep 2016 21:15:57 -0300</lastBuildDate>
     <atom:link href="https://matiasleidemer.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>your new post</title>
-      <link>https://matiasleidemer.github.io/blog/your-new-post/</link>
-      <pubDate>Sun, 18 Sep 2016 23:24:09 -0300</pubDate>
+      <title>Trying to get back on tract (redux)</title>
+      <link>https://matiasleidemer.github.io/blog/trying-to-get-back-on-tract-redux/</link>
+      <pubDate>Mon, 19 Sep 2016 21:15:57 -0300</pubDate>
       
-      <guid>https://matiasleidemer.github.io/blog/your-new-post/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+      <guid>https://matiasleidemer.github.io/blog/trying-to-get-back-on-tract-redux/</guid>
+      <description>&lt;p&gt;It has been a while since I blogged. For some reason I just can&amp;rsquo;t find the time, or motivation, to start writing something useful. More than once it feels like I have nothing to say at all.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;puts &amp;quot;this is a test&amp;quot;
+&lt;p&gt;I found a lot of excuses to not write. My favorite is not being able to find a good blog engine. I&amp;rsquo;ve been searching for quite some time for the perfect one.&lt;/p&gt;
 
-if true
-  @var = 1
-else
-  @var = &amp;quot;2&amp;quot;
-end
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://jekyllrb.com&#34;&gt;Jekyll&lt;/a&gt; is awesome, but I don&amp;rsquo;t wanna spend time tailoring it, but I also don&amp;rsquo;t like any layout I found out there;&lt;/li&gt;
+&lt;li&gt;The same happens for &lt;a href=&#34;https://hexo.io&#34;&gt;Hexo&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wordpress.com&#34;&gt;Wordpress&lt;/a&gt; never sounded appealing to me;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/&#34;&gt;Medium&lt;/a&gt; seems like a good option, but for some reason I don&amp;rsquo;t feel like writing code stuff there;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But I finally came across &lt;a href=&#34;http://gohugo.io/&#34;&gt;Gohugo&lt;/a&gt; and it&amp;rsquo;s beautiful &lt;a href=&#34;https://github.com/nishanths/cocoa-hugo-theme&#34;&gt;cocoa theme&lt;/a&gt;. I guess my excuses are gone for real. No more messing around, let&amp;rsquo;s get this started.&lt;/p&gt;
+
+&lt;p&gt;I will redirect &lt;a href=&#34;http://leidemer.com&#34;&gt;leidemer.com&lt;/a&gt; to this repository and it will be my main website.&lt;/p&gt;
+
+&lt;p&gt;Onward!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implementando Lazy Initialization</title>
+      <link>https://matiasleidemer.github.io/blog/implementando-lazy-initialization/</link>
+      <pubDate>Sat, 27 Sep 2014 21:13:48 -0300</pubDate>
+      
+      <guid>https://matiasleidemer.github.io/blog/implementando-lazy-initialization/</guid>
+      <description>&lt;p&gt;&lt;em&gt;In computer programming, lazy initialization is the tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed.&lt;/em&gt; &lt;a href=&#34;http://en.wikipedia.org/wiki/Lazy_initialization&#34;&gt;Wikipédia&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Inspirado pelo ótimo &lt;a href=&#34;http://patshaughnessy.net/2014/9/17/20000-leagues-under-activerecord&#34;&gt;20,000 Leagues Under ActiveRecord&lt;/a&gt;, decidi tentar implementar uma classe que utiliza a tática de &lt;em&gt;lazy initialization&lt;/em&gt; para postergar um processamento, teoricamente, custoso. A idéia, tal qual acontece com o ActiveRecord (explicado no post linkado) é ir adicionando condições à um objeto para, posteriormente, executar uma tarefa.&lt;/p&gt;
+
+&lt;p&gt;Para exemplificar, criei a &lt;a href=&#34;https://github.com/matiasleidemer/lazy_calculator&#34;&gt;LazyCalculator&lt;/a&gt;. Uma calculatora que armazena as condições (por hora, apenas adição e subtração) e, quando solicitada, calcula o resultado.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require_relative &amp;quot;lazy_calculator&amp;quot;
+
+calculator = LazyCalculator.new
+=&amp;gt; #&amp;lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[], @operations=[]&amp;gt;
+
+calculator.plus(5)
+=&amp;gt; #&amp;lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[5], @operations=[:+]&amp;gt;
+
+calculator.minus(2)
+=&amp;gt; #&amp;lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[5, 2], @operations=[:+, :-]&amp;gt;
+
+irb(main):006:0&amp;gt; calculator.calc
+=&amp;gt; 3
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Obviamente a complexidade da LazyCalculator nem se compara com a do ActiveRecord. Mas acho que a idéia fica bem clara nos exemplos acima. Observe que os métodos &lt;code&gt;plus&lt;/code&gt; e &lt;code&gt;minus&lt;/code&gt; retornam a instância do própria objeto. Isso possibilita o encadeamento de vários métodos (method chaining):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;calculator = LazyCalculator.new
+
+calculator.plus(5).minus(1).minus(9).plus(1).calc
+=&amp;gt; -3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Também fica bem claro como o método &lt;code&gt;calc&lt;/code&gt; é postergado até o momento em que é realmente necessário. Quando executado, ele verifica os valores e operações que já existem no objeto atual e realiza o cálculo.&lt;/p&gt;
+
+&lt;p&gt;Eu já havia observado esse comportamento no ActiveRecord, mas ainda não havia tirado um tempo para dar uma olhada com mais calma. Esse tipo de solução me agrada, simples e efetiva, utilize em seu código sempre que parecer conveniente.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Resolvendo Problemas com Acentos em Ruby</title>
+      <link>https://matiasleidemer.github.io/blog/resolvendo-problemas-com-acentos-em-ruby/</link>
+      <pubDate>Tue, 23 Sep 2014 21:11:24 -0300</pubDate>
+      
+      <guid>https://matiasleidemer.github.io/blog/resolvendo-problemas-com-acentos-em-ruby/</guid>
+      <description>&lt;p&gt;Lembro que a um tempo atrás eu fiz uma clean install do Mavericks no meu Macbook e tive alguns problemas chatos quanto acentuação em ruby. Sempre que eu tentava utilizar &lt;em&gt;ç&lt;/em&gt; ou &lt;em&gt;ã&lt;/em&gt;, por exemplo, tinha como retorno um caracter estranho ou mesmo uma quebra de linha.&lt;/p&gt;
+
+&lt;p&gt;Apesar de parecer, não era o caso de colocar o &lt;code&gt;encoding: utf-8&lt;/code&gt; no header do arquivo, já que o problema acontecia mesmo nas versões &amp;gt; 1.9.&lt;/p&gt;
+
+&lt;p&gt;Depois de muito quebrar a cabeça, verificar que o &lt;a href=&#34;http://blog.rlmflores.me/blog/2012/04/25/adding-utf-8-support-to-rubies-compiled-through-ruby-build/&#34;&gt;rbenv e ruby build estavam configurados corretamente para instalar com suporte a UTF-8&lt;/a&gt;, acabei descobrindo que o que eu realmente precisava configurar era o ambiente shell do Mavericks, e não o ruby em si.&lt;/p&gt;
+
+&lt;p&gt;Configurar as variáveis de &lt;a href=&#34;https://www.gnu.org/savannah-checkouts/gnu/libc/manual/html_node/Locale-Categories.html&#34;&gt;Locale Categories&lt;/a&gt; finalmente resolveu meu problema. Basta adicionar a linha abaixo no &lt;code&gt;.bash_profile&lt;/code&gt; ou em outro arquivo de configuração equivalente.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# na dúvida usei o macro LC_ALL e já deixei tudo com en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Review Practical Object-Oriented Design in Ruby</title>
+      <link>https://matiasleidemer.github.io/blog/review-practical-object-oriented-design-in-ruby/</link>
+      <pubDate>Mon, 15 Sep 2014 21:02:55 -0300</pubDate>
+      
+      <guid>https://matiasleidemer.github.io/blog/review-practical-object-oriented-design-in-ruby/</guid>
+      <description>&lt;p&gt;Não vou começar esse post dizendo que adoro ler livros técnicos. &lt;a href=&#34;http://www.goodreads.com/review/list/12920420-matias-leidemer?shelf=read&#34;&gt;Eu não gosto&lt;/a&gt;. Não consigo me lembrar de outros livros da mesma categoria que consegui ler até o fim.&lt;/p&gt;
+
+&lt;p&gt;Existe alguma coisa sobre o &lt;a href=&#34;http://www.poodr.com/&#34;&gt;POODR&lt;/a&gt; que o deixa diferente.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/sandimetz&#34;&gt;Sandi Metz&lt;/a&gt; fez um trabalho impecável aqui. A maneira como ela conduz a narrativa, como ela te faz pensar sobre os conceitos, é impressionante. Conceitos, estes, que você achava que sabia&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;O que mais me chamout atenção sobre o livro é como ele me ensinou que eu &lt;em&gt;não sei orientação a objetos&lt;/em&gt;. Ou, pelo menos, que eu sei menos do que eu achava que eu sabia. Um pouco chocante? Talvez. Mas necessário.&lt;/p&gt;
+
+&lt;p&gt;Durante o livro a autora apresenta um caso de uso relacionado à uma empresa que planeja viagens de bicicleta (esqueci o nome da empresa fictícia, depois atualizo o post). Os exemplos de código vão desde a modelagem de bicicletas (usando herança e depois &lt;em&gt;composition&lt;/em&gt;) em si, bem como agendamento de &lt;em&gt;trips&lt;/em&gt; com diferentes papéis (mecânico, motorista, etc) envolvidos.&lt;/p&gt;
+
+&lt;p&gt;Lembro bem de um caso em que ela indica que a estrutura das classes pode melhorar e eu simplemente não conseguia imaginar como isso poderia acontecer&amp;hellip; Logo depois de ler mais dois parágrafos e mais um snippet de código, tudo fez sentido.&lt;/p&gt;
+
+&lt;p&gt;Espere por muito conceito. A leitura é intensa, não deixe isso lhe desanimar. Sandi não exibe somente &lt;em&gt;code snippets&lt;/em&gt; com soluções e alternativas para problemas, mas ela explica muito bem o por que de tais escolhas e como isso diminui o &lt;strong&gt;custo de manutenção&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;O último capítulo, sobre testes, foi um dos que mais aproveitei. Novos posts virão por conta disso.&lt;/p&gt;
+
+&lt;p&gt;No fim das contas, &lt;em&gt;Practical Object-Oriented Design in Ruby&lt;/em&gt; é um livro &lt;strong&gt;obrigatório&lt;/strong&gt; para qualquer programador ruby (ou qualquer outra linguagem &lt;em&gt;dynamic typing&lt;/em&gt;) experiente ou não.&lt;/p&gt;
+
+&lt;p&gt;Lançado em 2012, é o único livro com &lt;a href=&#34;http://www.amazon.com/Practical-Object-Oriented-Design-Ruby-Addison-Wesley/dp/0321721330/ref=zg_bs_6134006011_3&#34;&gt;5 estrelas entre os best sellers de ruby na Amazon&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LEIA!&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Se Divertindo com o Método Transpose</title>
+      <link>https://matiasleidemer.github.io/blog/se-divertindo-com-o-m%C3%A9todo-transpose/</link>
+      <pubDate>Wed, 10 Sep 2014 19:52:41 -0300</pubDate>
+      
+      <guid>https://matiasleidemer.github.io/blog/se-divertindo-com-o-m%C3%A9todo-transpose/</guid>
+      <description>&lt;p&gt;Embora eu tenha usado poucas vezes, o método &lt;a href=&#34;http://http://www.ruby-doc.org/core-2.1.2/Array.html#method-i-transpose&#34;&gt;Array#transpose&lt;/a&gt; do ruby é muito interessante. Dependendo da sua forma de uso, pode apresentar soluções muito poderosas.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;names = %w(matias jose mateus)
+# =&amp;gt; [&amp;quot;matias&amp;quot;, &amp;quot;jose&amp;quot;, &amp;quot;mateus&amp;quot;]
+
+last_names = %w(leidemer gomes lorandi)
+# =&amp;gt; [&amp;quot;leidemer&amp;quot;, &amp;quot;gomes&amp;quot;, &amp;quot;lorandi&amp;quot;]
+
+[names, last_names].transpose
+# =&amp;gt; [[&amp;quot;matias&amp;quot;, &amp;quot;leidemer&amp;quot;], [&amp;quot;jose&amp;quot;, &amp;quot;gomes&amp;quot;], [&amp;quot;mateus&amp;quot;, &amp;quot;lorandi&amp;quot;]]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Neste exemplo, o método &lt;em&gt;junta&lt;/em&gt; os primeiros nomes definidos em &lt;code&gt;names&lt;/code&gt; junto com os sobrenomes definidos em &lt;code&gt;last_names&lt;/code&gt;, baseado nos índices de cada nome/sobrenome.&lt;/p&gt;
+
+&lt;p&gt;Usando o construtor do &lt;a href=&#34;http://www.ruby-doc.org/core-2.1.2/Hash.html#method-c-5B-5D&#34;&gt;Hash&lt;/a&gt;, podemos criar uma estrutura ainda mais interessante:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;result = [names, last_names].transpose
+# =&amp;gt; [[&amp;quot;matias&amp;quot;, &amp;quot;leidemer&amp;quot;], [&amp;quot;jose&amp;quot;, &amp;quot;gomes&amp;quot;], [&amp;quot;mateus&amp;quot;, &amp;quot;lorandi&amp;quot;]]
+
+Hash[result]
+# =&amp;gt; {&amp;quot;matias&amp;quot;=&amp;gt;&amp;quot;leidemer&amp;quot;, &amp;quot;jose&amp;quot;=&amp;gt;&amp;quot;gomes&amp;quot;, &amp;quot;mateus&amp;quot;=&amp;gt;&amp;quot;lorandi&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A utilização faz mais sentido quando você possui uma coleção de dados e precisa, por exemplo, identificar cada tipo de dado. Aqui, com o uso da classe &lt;a href=&#34;http://www.ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html&#34;&gt;OpenStruct&lt;/a&gt;, fica fácil de criar uma estrutura.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;ostruct&#39;
+
+columns = %w(title description published_at)
+# =&amp;gt; [&amp;quot;title&amp;quot;, &amp;quot;description&amp;quot;, &amp;quot;published_at&amp;quot;]
+
+data = [&amp;quot;Super Post&amp;quot;, &amp;quot;Big description here&amp;quot;, Date.new(2014, 5, 8)]
+# =&amp;gt; [&amp;quot;Super Post&amp;quot;, &amp;quot;Big description here&amp;quot;, 2014-05-08 00:00:00 -0300]
+
+hash = Hash[[columns, data].transpose]
+# =&amp;gt; {&amp;quot;title&amp;quot;=&amp;gt;&amp;quot;Super Post&amp;quot;, &amp;quot;description&amp;quot;=&amp;gt;&amp;quot;Big description here&amp;quot;, &amp;quot;published_at&amp;quot;=&amp;gt;2014-05-08 00:00:00 -0300}
+
+blog = OpenStruct.new hash
+# =&amp;gt; #&amp;lt;OpenStruct title=&amp;quot;Super Post&amp;quot;, description=&amp;quot;Big description here&amp;quot;, published_at=2014-05-08 00:00:00 -0300&amp;gt;
+
+blog.title
+# =&amp;gt; &amp;quot;Super Post&amp;quot;
+
+blog.description
+# =&amp;gt; &amp;quot;Big description here&amp;quot;
+
+blog.published_at
+# =&amp;gt; 2014-05-08 00:00:00 -0300
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lots of fun.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Instalando Postgresql no Mavericks</title>
+      <link>https://matiasleidemer.github.io/blog/instalando-postgresql-no-mavericks/</link>
+      <pubDate>Tue, 31 Dec 2013 19:46:08 -0300</pubDate>
+      
+      <guid>https://matiasleidemer.github.io/blog/instalando-postgresql-no-mavericks/</guid>
+      <description>
+
+&lt;p&gt;Aproveitando o fim de ano, decidi realizar uma &lt;em&gt;fresh install&lt;/em&gt; do Mavericks no meu Macbook.&lt;/p&gt;
+
+&lt;p&gt;Enquanto instalava minhas ferramentas de trabalho, tive um pouco de dificuldade para instalar o PostgreSQL. Não lembro exatamente como havia feito anteriormente, por isso decidi escrever aqui como foi o processo dessa vez.&lt;/p&gt;
+
+&lt;h3 id=&#34;homebrew&#34;&gt;Homebrew&lt;/h3&gt;
+
+&lt;p&gt;Bom, (quase) tudo que instalo no Mac, faço através do &lt;a href=&#34;http://brew.sh/&#34;&gt;homebrew&lt;/a&gt;. Se você ainda não usa, deveria.&lt;/p&gt;
+
+&lt;p&gt;A instalação do homebrew deve ocorrer normalmente, sua página contém bastante informação caso ocorra algum problema. Após a instalação, chegou a hora de instalar o nosso querido banco de dados. Através do homebrew, fica fácil de achar e instalar:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# podemos começar pesquisando pelas &amp;quot;formulas&amp;quot; disponíveis no homebrew:
+
+$ brew search postgres
+postgres-xc  postgresql
+homebrew/versions/postgresql8	  homebrew/versions/postgresql9	    homebrew/versions/postgresql91    homebrew/versions/postgresql92
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Entre as várias fórmulas disponíveis, a que queremos é a &lt;code&gt;postgresql&lt;/code&gt; mesmo. Para termos certeza do que se trata, basta rodar o comando &lt;code&gt;info&lt;/code&gt; do homebrew:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ brew info postgresql
+postgresql: stable 9.3.2 (bottled)
+http://www.postgresql.org/
+
+# (...) omitindo outras informações
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Uma das vantagens do homebrew, é que as fórmulas podem ser facilmente visualizadas, caso você queira saber o que acontece por trás dos panos. O comando &lt;code&gt;info&lt;/code&gt; retorna aonde está hospedada a fórmula. No caso do postgresql, está &lt;a href=&#34;https://github.com/Homebrew/homebrew/blob/master/Library/Formula/postgresql.rb&#34;&gt;aqui&lt;/a&gt;. No &lt;a href=&#34;https://github.com/Homebrew/homebrew&#34;&gt;Github do homebrew&lt;/a&gt;, é possível ver todas as fórmulas.&lt;/p&gt;
+
+&lt;p&gt;Tudo certo, hora de instalar! Mais uma vez, uma tarefa fácil:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ brew install postgresql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A instalação deve ocorrer normalmente também, dependendo da configuração da sua máquina, o processo pode demorar alguns minutos.&lt;/p&gt;
+
+&lt;h3 id=&#34;postgresql&#34;&gt;PostgreSQL&lt;/h3&gt;
+
+&lt;p&gt;Após a conclusão da instalação, hora de configurar o postgresql. Não há nada de muito especial, os passos realizados aqui funcionam bem para as minhas necessidades.&lt;/p&gt;
+
+&lt;p&gt;O primeiro passo é setar a variável de ambiente &lt;a href=&#34;http://www.postgresql.org/docs/9.3/static/storage-file-layout.html&#34;&gt;PGDATA&lt;/a&gt;, que contém os arquivos de configuração do cluster do banco. Caso você tenha feito a instalação sem nenhuma configuração adicional, este diretório deve estar em &lt;code&gt;/usr/local/var/postgres&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Adicione a seguinte linha no seu arquivo de configuração de bash: &lt;code&gt;export PGDATA=&amp;quot;/usr/local/var/postgres&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Eu uso o &lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh-my-zsh&lt;/a&gt;, no meu caso o arquivo de configuração fica em &lt;code&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Toda vez que você inicializar o postgres, ele vai procurar por essa variável de ambiente. O comando utilizado para inicializar o banco é &lt;a href=&#34;http://www.postgresql.org/docs/current/static/app-pg-ctl.html&#34;&gt;pg_ctl&lt;/a&gt;. Caso você não tenha configurado a variável de ambiente, é preciso passar a opção -D para o comando:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# inicializa o banco
+pg_ctl start -D /usr/local/var/postgres
+
+# pára o banco
+pg_ctl stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Por default, o log do servidor será exibido no buffer do seu terminal, uma das maneiras de evitar isso, é indicando um arquivo para o output do log, através da opção -l:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# inicia o banco setando arquivo de log externo
+pg_ctl start -l /usr/local/var/postgres/log
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Por fim, você pode criar aliases para iniciar e parar o servidor. Dentro do seu arquivo de configuração de shell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;alias postgres_start=&amp;quot;pg_ctl start -l /usr/local/var/postgres/log&amp;quot;
+alias postgres_stop=&amp;quot;pg_ctl stop&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Assim, os comando &lt;code&gt;postgres_start&lt;/code&gt; e &lt;code&gt;postgres_stop&lt;/code&gt; estarão disponíveis em qualquer seção do terminal.&lt;/p&gt;
+
+&lt;p&gt;Sei que ainda existe a opção de inicialização automática do banco, quando você loga no SO, mas, particularmente, não gosto muito deste approach.&lt;/p&gt;
 </description>
     </item>
     

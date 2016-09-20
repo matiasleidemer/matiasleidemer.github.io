@@ -1,0 +1,199 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The sun it shows, the sun it blinds">
+
+<base href="https://matiasleidemer.github.io/">
+<title>
+
+
+     Instalando Postgresql no Mavericks 
+
+</title>
+<link rel="canonical" href="https://matiasleidemer.github.io/blog/instalando-postgresql-no-mavericks/">
+
+
+<script type="text/javascript">
+    var baseURL = 'https:\/\/matiasleidemer.github.io\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/reset.css">
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/pygments.css">
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/main.css">
+
+
+    <link rel="stylesheet" href="https://matiasleidemer.github.io/css/override.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://matiasleidemer.github.io/img/leaf.ico"
+
+>
+
+
+
+</head>
+
+
+<section class="main post non-narrow">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Instalando Postgresql no Mavericks
+
+</div>
+
+                    <div class="initials"><a href="https://matiasleidemer.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Tue Dec 31 2013 19:46:08 -0300">Dec 31, 2013</div>
+                    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>Aproveitando o fim de ano, decidi realizar uma <em>fresh install</em> do Mavericks no meu Macbook.</p>
+
+<p>Enquanto instalava minhas ferramentas de trabalho, tive um pouco de dificuldade para instalar o PostgreSQL. Não lembro exatamente como havia feito anteriormente, por isso decidi escrever aqui como foi o processo dessa vez.</p>
+
+<h3 id="homebrew">Homebrew</h3>
+
+<p>Bom, (quase) tudo que instalo no Mac, faço através do <a href="http://brew.sh/">homebrew</a>. Se você ainda não usa, deveria.</p>
+
+<p>A instalação do homebrew deve ocorrer normalmente, sua página contém bastante informação caso ocorra algum problema. Após a instalação, chegou a hora de instalar o nosso querido banco de dados. Através do homebrew, fica fácil de achar e instalar:</p>
+
+<pre><code class="language-bash"># podemos começar pesquisando pelas &quot;formulas&quot; disponíveis no homebrew:
+
+$ brew search postgres
+postgres-xc  postgresql
+homebrew/versions/postgresql8	  homebrew/versions/postgresql9	    homebrew/versions/postgresql91    homebrew/versions/postgresql92
+</code></pre>
+
+<p>Entre as várias fórmulas disponíveis, a que queremos é a <code>postgresql</code> mesmo. Para termos certeza do que se trata, basta rodar o comando <code>info</code> do homebrew:</p>
+
+<pre><code class="language-bash">$ brew info postgresql
+postgresql: stable 9.3.2 (bottled)
+http://www.postgresql.org/
+
+# (...) omitindo outras informações
+</code></pre>
+
+<p>Uma das vantagens do homebrew, é que as fórmulas podem ser facilmente visualizadas, caso você queira saber o que acontece por trás dos panos. O comando <code>info</code> retorna aonde está hospedada a fórmula. No caso do postgresql, está <a href="https://github.com/Homebrew/homebrew/blob/master/Library/Formula/postgresql.rb">aqui</a>. No <a href="https://github.com/Homebrew/homebrew">Github do homebrew</a>, é possível ver todas as fórmulas.</p>
+
+<p>Tudo certo, hora de instalar! Mais uma vez, uma tarefa fácil:</p>
+
+<pre><code class="language-bash">$ brew install postgresql
+</code></pre>
+
+<p>A instalação deve ocorrer normalmente também, dependendo da configuração da sua máquina, o processo pode demorar alguns minutos.</p>
+
+<h3 id="postgresql">PostgreSQL</h3>
+
+<p>Após a conclusão da instalação, hora de configurar o postgresql. Não há nada de muito especial, os passos realizados aqui funcionam bem para as minhas necessidades.</p>
+
+<p>O primeiro passo é setar a variável de ambiente <a href="http://www.postgresql.org/docs/9.3/static/storage-file-layout.html">PGDATA</a>, que contém os arquivos de configuração do cluster do banco. Caso você tenha feito a instalação sem nenhuma configuração adicional, este diretório deve estar em <code>/usr/local/var/postgres</code>.</p>
+
+<p>Adicione a seguinte linha no seu arquivo de configuração de bash: <code>export PGDATA=&quot;/usr/local/var/postgres&quot;</code>.</p>
+
+<p>Eu uso o <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a>, no meu caso o arquivo de configuração fica em <code>~/.zshrc</code></p>
+
+<p>Toda vez que você inicializar o postgres, ele vai procurar por essa variável de ambiente. O comando utilizado para inicializar o banco é <a href="http://www.postgresql.org/docs/current/static/app-pg-ctl.html">pg_ctl</a>. Caso você não tenha configurado a variável de ambiente, é preciso passar a opção -D para o comando:</p>
+
+<pre><code class="language-bash"># inicializa o banco
+pg_ctl start -D /usr/local/var/postgres
+
+# pára o banco
+pg_ctl stop
+</code></pre>
+
+<p>Por default, o log do servidor será exibido no buffer do seu terminal, uma das maneiras de evitar isso, é indicando um arquivo para o output do log, através da opção -l:</p>
+
+<pre><code class="language-bash"># inicia o banco setando arquivo de log externo
+pg_ctl start -l /usr/local/var/postgres/log
+</code></pre>
+
+<p>Por fim, você pode criar aliases para iniciar e parar o servidor. Dentro do seu arquivo de configuração de shell:</p>
+
+<pre><code class="language-bash">alias postgres_start=&quot;pg_ctl start -l /usr/local/var/postgres/log&quot;
+alias postgres_stop=&quot;pg_ctl stop&quot;
+</code></pre>
+
+<p>Assim, os comando <code>postgres_start</code> e <code>postgres_stop</code> estarão disponíveis em qualquer seção do terminal.</p>
+
+<p>Sei que ainda existe a opção de inicialização automática do banco, quando você loga no SO, mas, particularmente, não gosto muito deste approach.</p>
+
+                <br>
+                <p><a href="https://matiasleidemer.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'matiasleidemer';
+    var disqus_identifier = 'https:\/\/matiasleidemer.github.io\/blog\/instalando-postgresql-no-mavericks\/';
+    var disqus_title = 'Instalando Postgresql no Mavericks';
+    var disqus_url = 'https:\/\/matiasleidemer.github.io\/blog\/instalando-postgresql-no-mavericks\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-54594431-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+

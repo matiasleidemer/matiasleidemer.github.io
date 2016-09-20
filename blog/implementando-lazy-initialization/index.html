@@ -1,0 +1,160 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The sun it shows, the sun it blinds">
+
+<base href="https://matiasleidemer.github.io/">
+<title>
+
+
+     Implementando Lazy Initialization 
+
+</title>
+<link rel="canonical" href="https://matiasleidemer.github.io/blog/implementando-lazy-initialization/">
+
+
+<script type="text/javascript">
+    var baseURL = 'https:\/\/matiasleidemer.github.io\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/reset.css">
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/pygments.css">
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/main.css">
+
+
+    <link rel="stylesheet" href="https://matiasleidemer.github.io/css/override.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://matiasleidemer.github.io/img/leaf.ico"
+
+>
+
+
+
+</head>
+
+
+<section class="main post non-narrow">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Implementando Lazy Initialization
+
+</div>
+
+                    <div class="initials"><a href="https://matiasleidemer.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Sat Sep 27 2014 21:13:48 BRT">Sep 27, 2014</div>
+                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                <p><em>In computer programming, lazy initialization is the tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed.</em> <a href="http://en.wikipedia.org/wiki/Lazy_initialization">Wikipédia</a>.</p>
+
+<p>Inspirado pelo ótimo <a href="http://patshaughnessy.net/2014/9/17/20000-leagues-under-activerecord">20,000 Leagues Under ActiveRecord</a>, decidi tentar implementar uma classe que utiliza a tática de <em>lazy initialization</em> para postergar um processamento, teoricamente, custoso. A idéia, tal qual acontece com o ActiveRecord (explicado no post linkado) é ir adicionando condições à um objeto para, posteriormente, executar uma tarefa.</p>
+
+<p>Para exemplificar, criei a <a href="https://github.com/matiasleidemer/lazy_calculator">LazyCalculator</a>. Uma calculatora que armazena as condições (por hora, apenas adição e subtração) e, quando solicitada, calcula o resultado.</p>
+
+<pre><code class="language-ruby">require_relative &quot;lazy_calculator&quot;
+
+calculator = LazyCalculator.new
+=&gt; #&lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[], @operations=[]&gt;
+
+calculator.plus(5)
+=&gt; #&lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[5], @operations=[:+]&gt;
+
+calculator.minus(2)
+=&gt; #&lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[5, 2], @operations=[:+, :-]&gt;
+
+irb(main):006:0&gt; calculator.calc
+=&gt; 3
+</code></pre>
+
+<p>Obviamente a complexidade da LazyCalculator nem se compara com a do ActiveRecord. Mas acho que a idéia fica bem clara nos exemplos acima. Observe que os métodos <code>plus</code> e <code>minus</code> retornam a instância do própria objeto. Isso possibilita o encadeamento de vários métodos (method chaining):</p>
+
+<pre><code class="language-ruby">calculator = LazyCalculator.new
+
+calculator.plus(5).minus(1).minus(9).plus(1).calc
+=&gt; -3
+</code></pre>
+
+<p>Também fica bem claro como o método <code>calc</code> é postergado até o momento em que é realmente necessário. Quando executado, ele verifica os valores e operações que já existem no objeto atual e realiza o cálculo.</p>
+
+<p>Eu já havia observado esse comportamento no ActiveRecord, mas ainda não havia tirado um tempo para dar uma olhada com mais calma. Esse tipo de solução me agrada, simples e efetiva, utilize em seu código sempre que parecer conveniente.</p>
+
+                <br>
+                <p><a href="https://matiasleidemer.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'matiasleidemer';
+    var disqus_identifier = 'https:\/\/matiasleidemer.github.io\/blog\/implementando-lazy-initialization\/';
+    var disqus_title = 'Implementando Lazy Initialization';
+    var disqus_url = 'https:\/\/matiasleidemer.github.io\/blog\/implementando-lazy-initialization\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-54594431-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+

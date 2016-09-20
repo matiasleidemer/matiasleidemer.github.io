@@ -1,0 +1,178 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The sun it shows, the sun it blinds">
+
+<base href="https://matiasleidemer.github.io/">
+<title>
+
+
+     Se Divertindo com o Método Transpose 
+
+</title>
+<link rel="canonical" href="https://matiasleidemer.github.io/blog/se-divertindo-com-o-m%C3%A9todo-transpose/">
+
+
+<script type="text/javascript">
+    var baseURL = 'https:\/\/matiasleidemer.github.io\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/reset.css">
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/pygments.css">
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/main.css">
+
+
+    <link rel="stylesheet" href="https://matiasleidemer.github.io/css/override.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://matiasleidemer.github.io/img/leaf.ico"
+
+>
+
+
+
+</head>
+
+
+<section class="main post non-narrow">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Se Divertindo com o Método Transpose
+
+</div>
+
+                    <div class="initials"><a href="https://matiasleidemer.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Wed Sep 10 2014 19:52:41 BRT">Sep 10, 2014</div>
+                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                <p>Embora eu tenha usado poucas vezes, o método <a href="http://http://www.ruby-doc.org/core-2.1.2/Array.html#method-i-transpose">Array#transpose</a> do ruby é muito interessante. Dependendo da sua forma de uso, pode apresentar soluções muito poderosas.</p>
+
+<pre><code class="language-ruby">names = %w(matias jose mateus)
+# =&gt; [&quot;matias&quot;, &quot;jose&quot;, &quot;mateus&quot;]
+
+last_names = %w(leidemer gomes lorandi)
+# =&gt; [&quot;leidemer&quot;, &quot;gomes&quot;, &quot;lorandi&quot;]
+
+[names, last_names].transpose
+# =&gt; [[&quot;matias&quot;, &quot;leidemer&quot;], [&quot;jose&quot;, &quot;gomes&quot;], [&quot;mateus&quot;, &quot;lorandi&quot;]]
+</code></pre>
+
+<p>Neste exemplo, o método <em>junta</em> os primeiros nomes definidos em <code>names</code> junto com os sobrenomes definidos em <code>last_names</code>, baseado nos índices de cada nome/sobrenome.</p>
+
+<p>Usando o construtor do <a href="http://www.ruby-doc.org/core-2.1.2/Hash.html#method-c-5B-5D">Hash</a>, podemos criar uma estrutura ainda mais interessante:</p>
+
+<pre><code class="language-ruby">result = [names, last_names].transpose
+# =&gt; [[&quot;matias&quot;, &quot;leidemer&quot;], [&quot;jose&quot;, &quot;gomes&quot;], [&quot;mateus&quot;, &quot;lorandi&quot;]]
+
+Hash[result]
+# =&gt; {&quot;matias&quot;=&gt;&quot;leidemer&quot;, &quot;jose&quot;=&gt;&quot;gomes&quot;, &quot;mateus&quot;=&gt;&quot;lorandi&quot;}
+</code></pre>
+
+<p>A utilização faz mais sentido quando você possui uma coleção de dados e precisa, por exemplo, identificar cada tipo de dado. Aqui, com o uso da classe <a href="http://www.ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html">OpenStruct</a>, fica fácil de criar uma estrutura.</p>
+
+<pre><code class="language-ruby">require 'ostruct'
+
+columns = %w(title description published_at)
+# =&gt; [&quot;title&quot;, &quot;description&quot;, &quot;published_at&quot;]
+
+data = [&quot;Super Post&quot;, &quot;Big description here&quot;, Date.new(2014, 5, 8)]
+# =&gt; [&quot;Super Post&quot;, &quot;Big description here&quot;, 2014-05-08 00:00:00 -0300]
+
+hash = Hash[[columns, data].transpose]
+# =&gt; {&quot;title&quot;=&gt;&quot;Super Post&quot;, &quot;description&quot;=&gt;&quot;Big description here&quot;, &quot;published_at&quot;=&gt;2014-05-08 00:00:00 -0300}
+
+blog = OpenStruct.new hash
+# =&gt; #&lt;OpenStruct title=&quot;Super Post&quot;, description=&quot;Big description here&quot;, published_at=2014-05-08 00:00:00 -0300&gt;
+
+blog.title
+# =&gt; &quot;Super Post&quot;
+
+blog.description
+# =&gt; &quot;Big description here&quot;
+
+blog.published_at
+# =&gt; 2014-05-08 00:00:00 -0300
+</code></pre>
+
+<p>Lots of fun.</p>
+
+                <br>
+                <p><a href="https://matiasleidemer.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'matiasleidemer';
+    var disqus_identifier = 'https:\/\/matiasleidemer.github.io\/blog\/se-divertindo-com-o-m%C3%A9todo-transpose\/';
+    var disqus_title = 'Se Divertindo com o Método Transpose';
+    var disqus_url = 'https:\/\/matiasleidemer.github.io\/blog\/se-divertindo-com-o-m%C3%A9todo-transpose\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-54594431-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,139 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The sun it shows, the sun it blinds">
+
+<base href="https://matiasleidemer.github.io/">
+<title>
+
+
+     Resolvendo Problemas com Acentos em Ruby 
+
+</title>
+<link rel="canonical" href="https://matiasleidemer.github.io/blog/resolvendo-problemas-com-acentos-em-ruby/">
+
+
+<script type="text/javascript">
+    var baseURL = 'https:\/\/matiasleidemer.github.io\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/reset.css">
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/pygments.css">
+<link rel="stylesheet" href="https://matiasleidemer.github.io/css/main.css">
+
+
+    <link rel="stylesheet" href="https://matiasleidemer.github.io/css/override.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://matiasleidemer.github.io/img/leaf.ico"
+
+>
+
+
+
+</head>
+
+
+<section class="main post non-narrow">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Resolvendo Problemas com Acentos em Ruby
+
+</div>
+
+                    <div class="initials"><a href="https://matiasleidemer.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Tue Sep 23 2014 21:11:24 BRT">Sep 23, 2014</div>
+                    <div class="reading-time"><div class="middot"></div>1 minute read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                <p>Lembro que a um tempo atrás eu fiz uma clean install do Mavericks no meu Macbook e tive alguns problemas chatos quanto acentuação em ruby. Sempre que eu tentava utilizar <em>ç</em> ou <em>ã</em>, por exemplo, tinha como retorno um caracter estranho ou mesmo uma quebra de linha.</p>
+
+<p>Apesar de parecer, não era o caso de colocar o <code>encoding: utf-8</code> no header do arquivo, já que o problema acontecia mesmo nas versões &gt; 1.9.</p>
+
+<p>Depois de muito quebrar a cabeça, verificar que o <a href="http://blog.rlmflores.me/blog/2012/04/25/adding-utf-8-support-to-rubies-compiled-through-ruby-build/">rbenv e ruby build estavam configurados corretamente para instalar com suporte a UTF-8</a>, acabei descobrindo que o que eu realmente precisava configurar era o ambiente shell do Mavericks, e não o ruby em si.</p>
+
+<p>Configurar as variáveis de <a href="https://www.gnu.org/savannah-checkouts/gnu/libc/manual/html_node/Locale-Categories.html">Locale Categories</a> finalmente resolveu meu problema. Basta adicionar a linha abaixo no <code>.bash_profile</code> ou em outro arquivo de configuração equivalente.</p>
+
+<pre><code class="language-bash"># na dúvida usei o macro LC_ALL e já deixei tudo com en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+</code></pre>
+
+                <br>
+                <p><a href="https://matiasleidemer.github.io/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'matiasleidemer';
+    var disqus_identifier = 'https:\/\/matiasleidemer.github.io\/blog\/resolvendo-problemas-com-acentos-em-ruby\/';
+    var disqus_title = 'Resolvendo Problemas com Acentos em Ruby';
+    var disqus_url = 'https:\/\/matiasleidemer.github.io\/blog\/resolvendo-problemas-com-acentos-em-ruby\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-54594431-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+

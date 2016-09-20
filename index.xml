@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Matias Leidemer</title>
-    <link>https://matiasleidemer.github.io/</link>
+    <link>http://www.leidemer.com/</link>
     <description>Recent content on Matias Leidemer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Mon, 19 Sep 2016 21:15:57 -0300</lastBuildDate>
-    <atom:link href="https://matiasleidemer.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://www.leidemer.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Trying to get back on tract (redux)</title>
-      <link>https://matiasleidemer.github.io/blog/trying-to-get-back-on-tract-redux/</link>
+      <link>http://www.leidemer.com/blog/trying-to-get-back-on-tract-redux/</link>
       <pubDate>Mon, 19 Sep 2016 21:15:57 -0300</pubDate>
       
-      <guid>https://matiasleidemer.github.io/blog/trying-to-get-back-on-tract-redux/</guid>
+      <guid>http://www.leidemer.com/blog/trying-to-get-back-on-tract-redux/</guid>
       <description>&lt;p&gt;It has been a while since I blogged. For some reason I just can&amp;rsquo;t find the time, or motivation, to start writing something useful. More than once it feels like I have nothing to say at all.&lt;/p&gt;
 
 &lt;p&gt;I found a lot of excuses to not write. My favorite is not being able to find a good blog engine. I&amp;rsquo;ve been searching for quite some time for the perfect one.&lt;/p&gt;
@@ -36,10 +36,10 @@
     
     <item>
       <title>about</title>
-      <link>https://matiasleidemer.github.io/about/</link>
+      <link>http://www.leidemer.com/about/</link>
       <pubDate>Mon, 19 Sep 2016 18:56:42 -0300</pubDate>
       
-      <guid>https://matiasleidemer.github.io/about/</guid>
+      <guid>http://www.leidemer.com/about/</guid>
       <description>
 
 &lt;h1 id=&#34;hi&#34;&gt;Hi&lt;/h1&gt;
@@ -56,10 +56,10 @@
     
     <item>
       <title>Implementando Lazy Initialization</title>
-      <link>https://matiasleidemer.github.io/blog/implementando-lazy-initialization/</link>
+      <link>http://www.leidemer.com/blog/implementando-lazy-initialization/</link>
       <pubDate>Sat, 27 Sep 2014 21:13:48 -0300</pubDate>
       
-      <guid>https://matiasleidemer.github.io/blog/implementando-lazy-initialization/</guid>
+      <guid>http://www.leidemer.com/blog/implementando-lazy-initialization/</guid>
       <description>&lt;p&gt;&lt;em&gt;In computer programming, lazy initialization is the tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed.&lt;/em&gt; &lt;a href=&#34;http://en.wikipedia.org/wiki/Lazy_initialization&#34;&gt;Wikipédia&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Inspirado pelo ótimo &lt;a href=&#34;http://patshaughnessy.net/2014/9/17/20000-leagues-under-activerecord&#34;&gt;20,000 Leagues Under ActiveRecord&lt;/a&gt;, decidi tentar implementar uma classe que utiliza a tática de &lt;em&gt;lazy initialization&lt;/em&gt; para postergar um processamento, teoricamente, custoso. A idéia, tal qual acontece com o ActiveRecord (explicado no post linkado) é ir adicionando condições à um objeto para, posteriormente, executar uma tarefa.&lt;/p&gt;
@@ -97,10 +97,10 @@ calculator.plus(5).minus(1).minus(9).plus(1).calc
     
     <item>
       <title>Resolvendo Problemas com Acentos em Ruby</title>
-      <link>https://matiasleidemer.github.io/blog/resolvendo-problemas-com-acentos-em-ruby/</link>
+      <link>http://www.leidemer.com/blog/resolvendo-problemas-com-acentos-em-ruby/</link>
       <pubDate>Tue, 23 Sep 2014 21:11:24 -0300</pubDate>
       
-      <guid>https://matiasleidemer.github.io/blog/resolvendo-problemas-com-acentos-em-ruby/</guid>
+      <guid>http://www.leidemer.com/blog/resolvendo-problemas-com-acentos-em-ruby/</guid>
       <description>&lt;p&gt;Lembro que a um tempo atrás eu fiz uma clean install do Mavericks no meu Macbook e tive alguns problemas chatos quanto acentuação em ruby. Sempre que eu tentava utilizar &lt;em&gt;ç&lt;/em&gt; ou &lt;em&gt;ã&lt;/em&gt;, por exemplo, tinha como retorno um caracter estranho ou mesmo uma quebra de linha.&lt;/p&gt;
 
 &lt;p&gt;Apesar de parecer, não era o caso de colocar o &lt;code&gt;encoding: utf-8&lt;/code&gt; no header do arquivo, já que o problema acontecia mesmo nas versões &amp;gt; 1.9.&lt;/p&gt;
@@ -117,10 +117,10 @@ export LC_ALL=en_US.UTF-8
     
     <item>
       <title>Review Practical Object-Oriented Design in Ruby</title>
-      <link>https://matiasleidemer.github.io/blog/review-practical-object-oriented-design-in-ruby/</link>
+      <link>http://www.leidemer.com/blog/review-practical-object-oriented-design-in-ruby/</link>
       <pubDate>Mon, 15 Sep 2014 21:02:55 -0300</pubDate>
       
-      <guid>https://matiasleidemer.github.io/blog/review-practical-object-oriented-design-in-ruby/</guid>
+      <guid>http://www.leidemer.com/blog/review-practical-object-oriented-design-in-ruby/</guid>
       <description>&lt;p&gt;Não vou começar esse post dizendo que adoro ler livros técnicos. &lt;a href=&#34;http://www.goodreads.com/review/list/12920420-matias-leidemer?shelf=read&#34;&gt;Eu não gosto&lt;/a&gt;. Não consigo me lembrar de outros livros da mesma categoria que consegui ler até o fim.&lt;/p&gt;
 
 &lt;p&gt;Existe alguma coisa sobre o &lt;a href=&#34;http://www.poodr.com/&#34;&gt;POODR&lt;/a&gt; que o deixa diferente.&lt;/p&gt;
@@ -147,10 +147,10 @@ export LC_ALL=en_US.UTF-8
     
     <item>
       <title>Se Divertindo com o Método Transpose</title>
-      <link>https://matiasleidemer.github.io/blog/se-divertindo-com-o-m%C3%A9todo-transpose/</link>
+      <link>http://www.leidemer.com/blog/se-divertindo-com-o-m%C3%A9todo-transpose/</link>
       <pubDate>Wed, 10 Sep 2014 19:52:41 -0300</pubDate>
       
-      <guid>https://matiasleidemer.github.io/blog/se-divertindo-com-o-m%C3%A9todo-transpose/</guid>
+      <guid>http://www.leidemer.com/blog/se-divertindo-com-o-m%C3%A9todo-transpose/</guid>
       <description>&lt;p&gt;Embora eu tenha usado poucas vezes, o método &lt;a href=&#34;http://http://www.ruby-doc.org/core-2.1.2/Array.html#method-i-transpose&#34;&gt;Array#transpose&lt;/a&gt; do ruby é muito interessante. Dependendo da sua forma de uso, pode apresentar soluções muito poderosas.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;names = %w(matias jose mateus)
@@ -206,10 +206,10 @@ blog.published_at
     
     <item>
       <title>Instalando Postgresql no Mavericks</title>
-      <link>https://matiasleidemer.github.io/blog/instalando-postgresql-no-mavericks/</link>
+      <link>http://www.leidemer.com/blog/instalando-postgresql-no-mavericks/</link>
       <pubDate>Tue, 31 Dec 2013 19:46:08 -0300</pubDate>
       
-      <guid>https://matiasleidemer.github.io/blog/instalando-postgresql-no-mavericks/</guid>
+      <guid>http://www.leidemer.com/blog/instalando-postgresql-no-mavericks/</guid>
       <description>
 
 &lt;p&gt;Aproveitando o fim de ano, decidi realizar uma &lt;em&gt;fresh install&lt;/em&gt; do Mavericks no meu Macbook.&lt;/p&gt;

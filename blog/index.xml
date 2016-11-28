@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on Matias Leidemer</title>
-    <link>http://www.leidemer.com/blog/</link>
-    <description>Recent content in Blog on Matias Leidemer</description>
+    <title>Blog-rss on Matias Leidemer</title>
+    <link>http://www.leidemer.com/blog/index.xml</link>
+    <description>Recent content in Blog-rss on Matias Leidemer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Mon, 19 Sep 2016 21:15:57 -0300</lastBuildDate>

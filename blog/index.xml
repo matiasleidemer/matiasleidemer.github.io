@@ -6,8 +6,24 @@
     <description>Recent content in Blog-rss on Matias Leidemer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 28 Nov 2016 21:07:55 -0200</lastBuildDate>
+    <lastBuildDate>Mon, 20 Feb 2017 20:40:55 -0300</lastBuildDate>
     <atom:link href="http://www.leidemer.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Write something everyday</title>
+      <link>http://www.leidemer.com/blog/write-something-everyday/</link>
+      <pubDate>Mon, 20 Feb 2017 20:40:55 -0300</pubDate>
+      
+      <guid>http://www.leidemer.com/blog/write-something-everyday/</guid>
+      <description>&lt;p&gt;After watching &lt;a href=&#34;http://www.imdb.com/title/tt6397576/?ref_=ttep_ep&#34;&gt;Abstract’s first episode&lt;/a&gt; there was something stuck in my head. In the episode Christoph says that he creates something everyday. It doesn’t matter if it’s good, bad. It doesn’t matter if it will be used later or not. But he needs to do that and suddenly things will start working out.&lt;/p&gt;
+
+&lt;p&gt;When I was very young I thought I was going to be a designer, I don’t know, working with images, movies, 3D animation or anything. Maybe because I was so addicted to video games, I dreamt about working with it.&lt;/p&gt;
+
+&lt;p&gt;Suddenly I realized I wasn’t creative. I just couldn’t have the insight, I couldn’t create anything outta my head. Of course I was young and naive, but still, I was left with this impression: &lt;em&gt;I’m not creative&lt;/em&gt;. Later I learned how to code and I knew right on what &lt;em&gt;I was going to be when I grow up&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;So after this digression, I just want to say I’m going to try to write something everyday. Doesn’t matter if it’s good or not, if it’s short or not, I will just put it out there. This is the first try, things start here.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Farewell, Twitter</title>
@@ -39,7 +55,7 @@
 &lt;li&gt;Friends twitting random stuff&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;From this list, what I really care about are number #1 and #2. It is also nice to know what&amp;rsquo;s going around in my area.&lt;/p&gt;
+&lt;p&gt;From this list, what I really care about are number #1 and #2. It is also nice to know what&amp;rsquo;s going around. But&lt;/p&gt;
 
 &lt;h2 id=&#34;time-to-go-away&#34;&gt;Time to go away&lt;/h2&gt;
 
@@ -60,10 +76,10 @@
 &lt;p&gt;Still, as a developer, I need to know what&amp;rsquo;s going on in the community. But, for my surprise, we have some great resources to keep up to date:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://refind.com&#34;&gt;Refind&lt;/a&gt;: &lt;em&gt;Refind is the home for the best links on the web. Discover and save what matters most to you.&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://rubyflow.com&#34;&gt;Rubyflow&lt;/a&gt;: &lt;em&gt;Made a library? Written a blog post? Found a useful tutorial? Share it with the Ruby community here or just enjoy what everyone else has found!&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://cooperpress.com&#34;&gt;Cooperpress&lt;/a&gt;: &lt;em&gt;Cooperpress publishes weekly email newsletters to an audience of over 300,000 developers and software engineers.&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://getpocket.com&#34;&gt;Pocket&lt;/a&gt;: &lt;em&gt;When you find something you want to view later, put it in Pocket.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;refind.com&#34;&gt;Refind&lt;/a&gt;: &lt;em&gt;Refind is the home for the best links on the web. Discover and save what matters most to you.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;rubyflow.com&#34;&gt;Rubyflow&lt;/a&gt;: &lt;em&gt;Made a library? Written a blog post? Found a useful tutorial? Share it with the Ruby community here or just enjoy what everyone else has found!&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;cooperpress.com&#34;&gt;Cooperpress&lt;/a&gt;: &lt;em&gt;Cooperpress publishes weekly email newsletters to an audience of over 300,000 developers and software engineers.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;getpocket.com&#34;&gt;Pocket&lt;/a&gt;: &lt;em&gt;When you find something you want to view later, put it in Pocket.&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;All of these sites will help you to stay up to date with what &lt;strong&gt;really matters&lt;/strong&gt; to you.&lt;/p&gt;

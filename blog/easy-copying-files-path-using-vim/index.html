@@ -1,0 +1,161 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The sun it shows, the sun it blinds">
+
+<base href="http://www.leidemer.com/">
+<title>
+
+
+     Easy Copying File&#39;s Path Using Vim 
+
+</title>
+<link rel="canonical" href="http://www.leidemer.com/blog/easy-copying-files-path-using-vim/">
+
+
+<script type="text/javascript">
+    var baseURL = 'http:\/\/www.leidemer.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+
+
+
+
+
+<link rel="stylesheet" href="http://www.leidemer.com/css/reset.css">
+<link rel="stylesheet" href="http://www.leidemer.com/css/pygments.css">
+<link rel="stylesheet" href="http://www.leidemer.com/css/main.css">
+
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="http://www.leidemer.com/img/leaf.ico"
+
+>
+
+
+
+</head>
+
+
+<section class="main post non-narrow">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Easy Copying File&#39;s Path Using Vim
+
+</div>
+
+                    <div class="initials"><a href="http://www.leidemer.com/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Wed Feb 22 2017 11:37:48 BRT">Feb 22, 2017</div>
+                    <div class="reading-time"><div class="middot"></div>1 minute read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                <p>Sometimes I need to copy the current file’s relative path to the main register (Cmd+C). Luckily Vim has a nice command that returns it:</p>
+
+<pre><code class="language-vim">expand(&quot;%&quot;)
+&quot; =&gt; current_project/path/to/file.rb
+</code></pre>
+
+<p>It also has a command that returns the current line your cursor is at: <code>line(&quot;.&quot;)</code>, and of course you can use both commands at the same time:</p>
+
+<pre><code class="language-vim">&quot; use . to concatenate things
+expand(&quot;%&quot;) . &quot;:&quot; . line(&quot;.&quot;)
+&quot; =&gt; current_project/path/to/file.rb:42
+</code></pre>
+
+<p><em>Alright, cool, that helps, but now what?</em></p>
+
+<p>Now you can add that output to your main register (in OSX), which can be achieved using <code>@+</code>:</p>
+
+<pre><code class="language-vim">:let @+ = expand(&quot;%&quot;) . &quot;:&quot; . line(&quot;.&quot;)
+</code></pre>
+
+<p>It wouldn’t be a vim post without creating a new shortcut, am I right? I personally like to have both options, one with the line number at the end and the other without it.</p>
+
+<p>In my <code>.vimrc</code> file I mapped those to  <code>leader + C</code> and  <code>leader + c</code> .</p>
+
+<pre><code class="language-vim">&quot; Copy relative path to clipboard
+nnoremap &lt;silent&gt; &lt;Leader&gt;c :let @+ = expand(&quot;%&quot;)&lt;CR&gt;
+nnoremap &lt;silent&gt; &lt;Leader&gt;C :let @+ = expand(&quot;%&quot;) . &quot;:&quot; . line(&quot;.&quot;)&lt;CR&gt;
+</code></pre>
+
+<p>That&rsquo;s it, I hope you enjoyed.</p>
+
+                <br>
+                <p><a href="http://www.leidemer.com/blog/">Back to posts</a></p>
+            </div>
+            
+            <div class="addthis_inline_share_toolbox">
+            </div>
+            <br>
+            <div class="disqus">
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'drivingsouth';
+    var disqus_identifier = 'http:\/\/www.leidemer.com\/blog\/easy-copying-files-path-using-vim\/';
+    var disqus_title = 'Easy Copying File\x27s Path Using Vim';
+    var disqus_url = 'http:\/\/www.leidemer.com\/blog\/easy-copying-files-path-using-vim\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54594431-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-541789797a32d619">
+</script>
+
+
+</body>
+</html>
+

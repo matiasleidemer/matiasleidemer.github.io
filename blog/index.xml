@@ -6,8 +6,47 @@
     <description>Recent content in Blog-rss on Matias Leidemer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 20 Feb 2017 20:40:55 -0300</lastBuildDate>
+    <lastBuildDate>Wed, 22 Feb 2017 11:37:48 -0300</lastBuildDate>
     <atom:link href="http://www.leidemer.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Easy Copying File&#39;s Path Using Vim</title>
+      <link>http://www.leidemer.com/blog/easy-copying-files-path-using-vim/</link>
+      <pubDate>Wed, 22 Feb 2017 11:37:48 -0300</pubDate>
+      
+      <guid>http://www.leidemer.com/blog/easy-copying-files-path-using-vim/</guid>
+      <description>&lt;p&gt;Sometimes I need to copy the current file’s relative path to the main register (Cmd+C). Luckily Vim has a nice command that returns it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;expand(&amp;quot;%&amp;quot;)
+&amp;quot; =&amp;gt; current_project/path/to/file.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It also has a command that returns the current line your cursor is at: &lt;code&gt;line(&amp;quot;.&amp;quot;)&lt;/code&gt;, and of course you can use both commands at the same time:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; use . to concatenate things
+expand(&amp;quot;%&amp;quot;) . &amp;quot;:&amp;quot; . line(&amp;quot;.&amp;quot;)
+&amp;quot; =&amp;gt; current_project/path/to/file.rb:42
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Alright, cool, that helps, but now what?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now you can add that output to your main register (in OSX), which can be achieved using &lt;code&gt;@+&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;:let @+ = expand(&amp;quot;%&amp;quot;) . &amp;quot;:&amp;quot; . line(&amp;quot;.&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It wouldn’t be a vim post without creating a new shortcut, am I right? I personally like to have both options, one with the line number at the end and the other without it.&lt;/p&gt;
+
+&lt;p&gt;In my &lt;code&gt;.vimrc&lt;/code&gt; file I mapped those to  &lt;code&gt;leader + C&lt;/code&gt; and  &lt;code&gt;leader + c&lt;/code&gt; .&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Copy relative path to clipboard
+nnoremap &amp;lt;silent&amp;gt; &amp;lt;Leader&amp;gt;c :let @+ = expand(&amp;quot;%&amp;quot;)&amp;lt;CR&amp;gt;
+nnoremap &amp;lt;silent&amp;gt; &amp;lt;Leader&amp;gt;C :let @+ = expand(&amp;quot;%&amp;quot;) . &amp;quot;:&amp;quot; . line(&amp;quot;.&amp;quot;)&amp;lt;CR&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s it, I hope you enjoyed.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Write something everyday</title>

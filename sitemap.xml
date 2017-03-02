@@ -2,8 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.leidemer.com/</loc>
-    <lastmod>2017-02-22T11:37:48-03:00</lastmod>
+    <loc>http://www.leidemer.com/blog/be-careful-with-method-caching/</loc>
+    <lastmod>2017-03-01T22:44:48-03:00</lastmod>
   </url>
   
   <url>
@@ -54,6 +54,24 @@
   <url>
     <loc>http://www.leidemer.com/blog/instalando-postgresql-no-mavericks/</loc>
     <lastmod>2013-12-31T19:46:08-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.leidemer.com/blog/</loc>
+    <lastmod>2017-03-01T22:44:48-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.leidemer.com/fixed/</loc>
+    <lastmod>2016-09-19T18:56:42-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.leidemer.com/</loc>
+    <lastmod>2017-03-01T22:44:48-03:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

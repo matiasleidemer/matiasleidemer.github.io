@@ -144,7 +144,7 @@ blog.oldest_post
 
 <p><em>Wait, what just happened?</em></p>
 
-<p>Yup, even after deleting the oldest post, the blog object still has a reference to it in the <code>oldest_post</code> method. And this happened because of the caching I added to that method. We fetched the oldest post and kept it in the <code>@oldest_post</code>.</p>
+<p>Yup, even after deleting the oldest post, the blog object still has a reference to it in the <code>oldest_post</code> method, and this happened because of the caching. We fetched the oldest post and kept it in the <code>@oldest_post</code>, even after deleting it from the database.</p>
 
 <p>So as long as the <code>blog</code> object exists in the context, that post will be there, which is not the desirable behavior we want in this case.</p>
 

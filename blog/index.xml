@@ -37,7 +37,7 @@ end
 
 &lt;p&gt;Pretty straightforward, right? I don’t care about stubs or mocks here, what I want to do with this spec is to make sure the blog’s oldest post got deleted.&lt;/p&gt;
 
-&lt;p&gt;Turns out I was getting an rspec expectation failure, saying that it expected to change &lt;code&gt;blog.oldest_post&lt;/code&gt; from &lt;code&gt;oldest_post&lt;/code&gt; to &lt;code&gt;nil&lt;/code&gt; but it did not. Basically it didn’t delete the association.&lt;/p&gt;
+&lt;p&gt;Turns out I was getting a rspec expectation failure, saying that it expected to change &lt;code&gt;blog.oldest_post&lt;/code&gt; from &lt;code&gt;oldest_post&lt;/code&gt; to &lt;code&gt;nil&lt;/code&gt; but it did not. Basically it didn’t delete the association (so I thought).&lt;/p&gt;
 
 &lt;p&gt;The implementation for that method was quite simple too:&lt;/p&gt;
 
@@ -67,7 +67,7 @@ end
 
 &lt;p&gt;That’s a fairly common practice in ruby, while an object exists we can cache a method by assigning it to a instance variable (using &lt;code&gt;@&lt;/code&gt;). When we first call that method, the &lt;code&gt;@oldest_post&lt;/code&gt; variable is not defined, which then triggers the &lt;code&gt;posts.oldest&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;The second time we call it, it won’t try to fetch the oldest post again (avoiding hitting the database once more, which is a good thing) and will return whatever the &lt;code&gt;@oldest_post&lt;/code&gt; variable points too. Common terrain for experienced ruby developers, to be honest.&lt;/p&gt;
+&lt;p&gt;The second time we call it, it won’t try to fetch the oldest post again (avoiding hitting the database once more, which is a good thing) and will return whatever the &lt;code&gt;@oldest_post&lt;/code&gt; variable points to. Common terrain for experienced ruby developers, to be honest.&lt;/p&gt;
 
 &lt;p&gt;But check this out:&lt;/p&gt;
 

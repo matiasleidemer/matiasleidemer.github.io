@@ -94,7 +94,7 @@ end
 
 <p>Pretty straightforward, right? I don’t care about stubs or mocks here, what I want to do with this spec is to make sure the blog’s oldest post got deleted.</p>
 
-<p>Turns out I was getting an rspec expectation failure, saying that it expected to change <code>blog.oldest_post</code> from <code>oldest_post</code> to <code>nil</code> but it did not. Basically it didn’t delete the association.</p>
+<p>Turns out I was getting a rspec expectation failure, saying that it expected to change <code>blog.oldest_post</code> from <code>oldest_post</code> to <code>nil</code> but it did not. Basically it didn’t delete the association (so I thought).</p>
 
 <p>The implementation for that method was quite simple too:</p>
 
@@ -124,7 +124,7 @@ end
 
 <p>That’s a fairly common practice in ruby, while an object exists we can cache a method by assigning it to a instance variable (using <code>@</code>). When we first call that method, the <code>@oldest_post</code> variable is not defined, which then triggers the <code>posts.oldest</code>.</p>
 
-<p>The second time we call it, it won’t try to fetch the oldest post again (avoiding hitting the database once more, which is a good thing) and will return whatever the <code>@oldest_post</code> variable points too. Common terrain for experienced ruby developers, to be honest.</p>
+<p>The second time we call it, it won’t try to fetch the oldest post again (avoiding hitting the database once more, which is a good thing) and will return whatever the <code>@oldest_post</code> variable points to. Common terrain for experienced ruby developers, to be honest.</p>
 
 <p>But check this out:</p>
 

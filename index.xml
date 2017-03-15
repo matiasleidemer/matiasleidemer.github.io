@@ -6,8 +6,30 @@
     <description>Recent content on Matias Leidemer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 01 Mar 2017 22:44:48 -0300</lastBuildDate>
+    <lastBuildDate>Mon, 13 Mar 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://www.leidemer.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>99 Bottles of Beer (Meta Review)</title>
+      <link>http://www.leidemer.com/blog/99-bottles-of-beer-meta-review/</link>
+      <pubDate>Mon, 13 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.leidemer.com/blog/99-bottles-of-beer-meta-review/</guid>
+      <description>&lt;p&gt;I’ve just finished reading &lt;a href=&#34;https://www.sandimetz.com/99bottles/&#34;&gt;99 Bottles of OOP&lt;/a&gt; by Sandi Metz, and, just like her &lt;a href=&#34;http://www.poodr.com/&#34;&gt;other book&lt;/a&gt; (which I &lt;a href=&#34;http://www.leidemer.com/blog/review-practical-object-oriented-design-in-ruby/&#34;&gt;reviewed in Portuguese&lt;/a&gt;), it’s a very good read.&lt;/p&gt;
+
+&lt;p&gt;If you’re into Object-Oriented Programming and you don’t know Sandi, you’re doing it wrong. She’s a very famous OO advocate and has given a lot of talks on the subject. The &lt;a href=&#34;https://www.youtube.com/watch?v=8bZh5LMaSmE&amp;amp;t=2084s&#34;&gt;one at the Railsconf 2014&lt;/a&gt; is one of my favorites.&lt;/p&gt;
+
+&lt;p&gt;Now, back to the 99 Bottles.  The book guides the reader through a refactoring of the &lt;a href=&#34;https://www.rosettacode.org/wiki/99_Bottles_of_Beer&#34;&gt;99 Bottles of Beer song&lt;/a&gt;. It also introduces a new requirement and how to change your code in order to make it work.&lt;/p&gt;
+
+&lt;p&gt;Along the way she explains a lot about techniques to make your refactoring easier to follow, always taking advantage of the test suite and changing only a single line before running the tests again, she calls it &amp;ldquo;The Flocking Rules&amp;rdquo;. It may sound a little too much, but it makes perfect sense throughout the book. Techniques and tools to analyze code complexity are also presented.&lt;/p&gt;
+
+&lt;p&gt;She also talks a lot about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Liskov_substitution_principle&#34;&gt;Liskov substitution principle&lt;/a&gt; and, especially about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Open/closed_principle&#34;&gt;open/closed principle&lt;/a&gt;, which was very enlightening, making for a bunch of &amp;ldquo;aha moments&amp;rdquo;. There&amp;rsquo;s also a very nice topic where she explains why inheritance is good &lt;a href=&#34;https://en.wikipedia.org/wiki/Composition_over_inheritance&#34;&gt;instead of bad&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Like her other book, I really recommend this one. I&amp;rsquo;m very sure you&amp;rsquo;re gonna become a better software developer after reading it.&lt;/p&gt;
+
+&lt;p&gt;⭐️⭐️⭐️⭐️⭐️&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Be Careful With Method Caching</title>

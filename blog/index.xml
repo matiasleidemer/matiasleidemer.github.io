@@ -19,7 +19,7 @@
 
 &lt;p&gt;If you’re into Object-Oriented Programming and you don’t know Sandi, you’re doing it wrong. She’s a very famous OO advocate and has given a lot of talks on the subject. The &lt;a href=&#34;https://www.youtube.com/watch?v=8bZh5LMaSmE&amp;amp;t=2084s&#34;&gt;one at the Railsconf 2014&lt;/a&gt; is one of my favorites.&lt;/p&gt;
 
-&lt;p&gt;Now, back to the 99 Bottles.  The book guides the reader through a refactoring of the &lt;a href=&#34;https://www.rosettacode.org/wiki/99_Bottles_of_Beer&#34;&gt;99 Bottles of Beer song&lt;/a&gt;. It also introduces a new requirement and how to change your code in order to make it work.&lt;/p&gt;
+&lt;p&gt;Now, back to the 99 Bottles.  The book guides the reader through a refactoring of the &lt;a href=&#34;https://www.rosettacode.org/wiki/99_Bottles_of_Beer&#34;&gt;99 Bottles of Beer song&lt;/a&gt;. It also introduces a new requirement and how to change your code in order fit it in.&lt;/p&gt;
 
 &lt;p&gt;Along the way she explains a lot about techniques to make your refactoring easier to follow, always taking advantage of the test suite and changing only a single line before running the tests again, she calls it &amp;ldquo;The Flocking Rules&amp;rdquo;. It may sound a little too much, but it makes perfect sense throughout the book. Techniques and tools to analyze code complexity are also presented.&lt;/p&gt;
 

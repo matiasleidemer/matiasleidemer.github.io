@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on Matias Leidemer</title>
+    <title>Blog on Matias Leidemer&#39;s Blog</title>
     <link>http://www.leidemer.com/blog/index.xml</link>
-    <description>Recent content in Blog on Matias Leidemer</description>
+    <description>Recent content in Blog on Matias Leidemer&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 13 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Mar 2017 21:10:00 -0300</lastBuildDate>
     <atom:link href="http://www.leidemer.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>99 Bottles of Beer (Meta Review)</title>
       <link>http://www.leidemer.com/blog/99-bottles-of-beer-meta-review/</link>
-      <pubDate>Mon, 13 Mar 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 14 Mar 2017 21:10:00 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/99-bottles-of-beer-meta-review/</guid>
       <description>&lt;p&gt;I’ve just finished reading &lt;a href=&#34;https://www.sandimetz.com/99bottles/&#34;&gt;99 Bottles of OOP&lt;/a&gt; by Sandi Metz, and, just like her &lt;a href=&#34;http://www.poodr.com/&#34;&gt;other book&lt;/a&gt; (which I &lt;a href=&#34;http://www.leidemer.com/blog/review-practical-object-oriented-design-in-ruby/&#34;&gt;reviewed in Portuguese&lt;/a&gt;), it’s a very good read.&lt;/p&gt;

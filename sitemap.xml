@@ -68,6 +68,11 @@
   </url>
   
   <url>
+    <loc>http://www.leidemer.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://www.leidemer.com/fixed/</loc>
     <lastmod>2016-09-19T18:56:42-03:00</lastmod>
     <priority>0</priority>
@@ -76,6 +81,11 @@
   <url>
     <loc>http://www.leidemer.com/</loc>
     <lastmod>2017-03-14T21:10:00-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.leidemer.com/tags/</loc>
     <priority>0</priority>
   </url>
   

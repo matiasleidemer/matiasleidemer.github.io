@@ -2,31 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fixed on Matias Leidemer&#39;s Blog</title>
-    <link>http://www.leidemer.com/fixed/index.xml</link>
+    <link>http://www.leidemer.com/fixed/</link>
     <description>Recent content in Fixed on Matias Leidemer&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Mon, 19 Sep 2016 18:56:42 -0300</lastBuildDate>
-    <atom:link href="http://www.leidemer.com/fixed/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://www.leidemer.com/fixed/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
-      <title>about</title>
+      <title>About</title>
       <link>http://www.leidemer.com/about/</link>
       <pubDate>Mon, 19 Sep 2016 18:56:42 -0300</pubDate>
       
       <guid>http://www.leidemer.com/about/</guid>
-      <description>
-
-&lt;h1 id=&#34;hi&#34;&gt;Hi&lt;/h1&gt;
-
-&lt;p&gt;My name is Matias Leidemer, I am a software developer based in Novo Hamburgo, Brazil. I am currently working for &lt;a href=&#34;https://www.stickermule.com/&#34;&gt;stickermule&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I like to write code that writes code, listen to music, watch movies and all kinds of animals.&lt;/p&gt;
-
-&lt;p&gt;This page is powered by &lt;a href=&#34;http://gohugo.io/&#34;&gt;gohugo&lt;/a&gt;, with the &lt;a href=&#34;https://github.com/nishanths/cocoa-hugo-theme&#34;&gt;cocoa theme&lt;/a&gt; and hosted using &lt;a href=&#34;https://github.com/matiasleidemer/matiasleidemer.github.io&#34;&gt;github pages&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you feel like talking to me, you can use one of the social links at the bottom of this page.&lt;/p&gt;
-</description>
+      <description>Hello.
+My name is Matias Leidemer, I am a software developer based in Novo Hamburgo, Brazil. I am currently working for Stickermule.
+I like to write code that writes code, listen to music, watch movies and all kinds of animals.
+This page is powered by gohugo, with the cocoa theme and hosted using github pages.
+If you feel like talking to me, you can use one of the social links at the bottom of this page.</description>
     </item>
     
   </channel>

@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on Matias Leidemer&#39;s Blog</title>
-    <link>http://www.leidemer.com/blog/index.xml</link>
+    <link>http://www.leidemer.com/blog/</link>
     <description>Recent content in Blog on Matias Leidemer&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Tue, 14 Mar 2017 21:10:00 -0300</lastBuildDate>
-    <atom:link href="http://www.leidemer.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://www.leidemer.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>99 Bottles of Beer (Meta Review)</title>
@@ -15,20 +17,9 @@
       <pubDate>Tue, 14 Mar 2017 21:10:00 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/99-bottles-of-beer-meta-review/</guid>
-      <description>&lt;p&gt;I’ve just finished reading &lt;a href=&#34;https://www.sandimetz.com/99bottles/&#34;&gt;99 Bottles of OOP&lt;/a&gt; by Sandi Metz, and, just like her &lt;a href=&#34;http://www.poodr.com/&#34;&gt;other book&lt;/a&gt; (which I &lt;a href=&#34;http://www.leidemer.com/blog/review-practical-object-oriented-design-in-ruby/&#34;&gt;reviewed in Portuguese&lt;/a&gt;), it’s a very good read.&lt;/p&gt;
-
-&lt;p&gt;If you’re into Object-Oriented Programming and you don’t know Sandi, you’re doing it wrong. She’s a very famous OO advocate and has given a lot of talks on the subject. The &lt;a href=&#34;https://www.youtube.com/watch?v=8bZh5LMaSmE&amp;amp;t=2084s&#34;&gt;one at the Railsconf 2014&lt;/a&gt; is one of my favorites.&lt;/p&gt;
-
-&lt;p&gt;Now, back to the 99 Bottles.  The book guides the reader through a refactoring of the &lt;a href=&#34;https://www.rosettacode.org/wiki/99_Bottles_of_Beer&#34;&gt;99 Bottles of Beer song&lt;/a&gt;. It also introduces a new requirement and how to change your code in order fit it in.&lt;/p&gt;
-
-&lt;p&gt;Along the way she explains a lot about techniques to make your refactoring easier to follow, always taking advantage of the test suite and changing only a single line before running the tests again. This, with some other techniques to make refactoring safer, is called by her as &amp;ldquo;The Flocking Rules&amp;rdquo;. It may sound a little too much sometimes, but it makes perfect sense throughout the book. Techniques and tools to analyze code complexity are also presented.&lt;/p&gt;
-
-&lt;p&gt;She also talks a lot about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Liskov_substitution_principle&#34;&gt;Liskov substitution principle&lt;/a&gt; and, especially, about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Open/closed_principle&#34;&gt;open/closed principle&lt;/a&gt;, which was very enlightening, making for a bunch of &amp;ldquo;aha moments&amp;rdquo;. There&amp;rsquo;s also a very nice topic where she explains why inheritance is good &lt;a href=&#34;https://en.wikipedia.org/wiki/Composition_over_inheritance&#34;&gt;instead of bad&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Like her other book, I really recommend this one. I&amp;rsquo;m very sure you&amp;rsquo;re gonna become a better software developer after reading it.&lt;/p&gt;
-
-&lt;p&gt;⭐️⭐️⭐️⭐️⭐️&lt;/p&gt;
-</description>
+      <description>I’ve just finished reading 99 Bottles of OOP by Sandi Metz, and, just like her other book (which I reviewed in Portuguese), it’s a very good read.
+If you’re into Object-Oriented Programming and you don’t know Sandi, you’re doing it wrong. She’s a very famous OO advocate and has given a lot of talks on the subject. The one at the Railsconf 2014 is one of my favorites.
+Now, back to the 99 Bottles.</description>
     </item>
     
     <item>
@@ -37,94 +28,8 @@
       <pubDate>Wed, 01 Mar 2017 22:44:48 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/be-careful-with-method-caching/</guid>
-      <description>&lt;p&gt;Today I spent a good amount of time trying to understand why a specific spec was failing. It was a little bit like this (I changed classes/method names for the sake of the example):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;spec_helper&#39;
-
-RSpec.describe Blog do
-  describe &#39;#delete_oldest_post&#39; do
-    it &amp;quot;deletes the blog&#39;s oldest post&amp;quot; do
-      blog = FactoryGirl.create(:blog)
-      oldest_post = FactoryGirl.create(:post, created_at: Time.zone.now - 1.year)
-      blog.posts &amp;lt;&amp;lt; oldest_post
-
-      expect { blog.delete_oldest_post }
-        .to change { blog.oldest_post }
-        .from(oldest_post)
-        .to(nil)
-    end
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Pretty straightforward, right? I don’t care about stubs or mocks here, what I want to do with this spec is to make sure the blog’s oldest post got deleted.&lt;/p&gt;
-
-&lt;p&gt;Turns out I was getting a rspec expectation failure, saying that it expected to change &lt;code&gt;blog.oldest_post&lt;/code&gt; from &lt;code&gt;oldest_post&lt;/code&gt; to &lt;code&gt;nil&lt;/code&gt; but it did not. Basically it didn’t delete the association (so I thought).&lt;/p&gt;
-
-&lt;p&gt;The implementation for that method was quite simple too:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class Blog &amp;lt; ActiveRecord::Base
-  def delete_oldest_post
-    oldest_post.delete if oldest_post.present?
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Easy enough: if the post has an oldest post delete it, if not, whatever (which in ruby translates to &lt;code&gt;nil&lt;/code&gt;). While I was debugging it I even tried to call &lt;code&gt;#reload&lt;/code&gt; on the blog object in the spec (to fetch it from the database again), in hopes it was some weird rails sql cache or something, but no luck.&lt;/p&gt;
-
-&lt;p&gt;After a while I went to check the &lt;code&gt;#oldest_post&lt;/code&gt; implementation, and then I saw this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class Blog &amp;lt; ActiveRecord::Base
-  has_many :posts
-
-  def oldest_post
-    @oldest_post ||= posts.oldest
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Don’t bother how &lt;code&gt;PostAssociation#oldest&lt;/code&gt; is implemented, it just returns the oldest post for that blog and that’s it.&lt;/p&gt;
-
-&lt;p&gt;But, the real problem here is that &lt;code&gt;@oldest_post ||=&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;That’s a fairly common practice in ruby, while an object exists we can cache a method by assigning it to a instance variable (using &lt;code&gt;@&lt;/code&gt;). When we first call that method, the &lt;code&gt;@oldest_post&lt;/code&gt; variable is not defined, which then triggers the &lt;code&gt;posts.oldest&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The second time we call it, it won’t try to fetch the oldest post again (avoiding hitting the database once more, which is a good thing) and will return whatever the &lt;code&gt;@oldest_post&lt;/code&gt; variable points to. Common terrain for experienced ruby developers, to be honest.&lt;/p&gt;
-
-&lt;p&gt;But check this out:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;blog = Blog.last # fetches the latest blog from the database
-blog.oldest_post
-# =&amp;gt; &amp;lt;Post object&amp;gt;
-
-blog.delete_oldest_post
-# =&amp;gt; successfully deletes the oldest post with sql logs and etc
-
-blog.reload.posts.count
-# =&amp;gt; 0
-
-blog.oldest_post
-# =&amp;gt; &amp;lt;Post object&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Wait, what just happened?&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Yup, even after deleting the oldest post, the blog object still has a reference to it in the &lt;code&gt;oldest_post&lt;/code&gt; method, and this happened because of the caching. We fetched the oldest post and kept it in the &lt;code&gt;@oldest_post&lt;/code&gt;, even after deleting it from the database.&lt;/p&gt;
-
-&lt;p&gt;So as long as the &lt;code&gt;blog&lt;/code&gt; object exists in the context, that post will be there, which is not the desirable behavior we want in this case.&lt;/p&gt;
-
-&lt;p&gt;Interesting enough, it fails for the &lt;code&gt;#persisted?&lt;/code&gt; message, meaning that the oldest post was really deleted.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;blog.oldest_post.persisted?
-# =&amp;gt; false
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It seems silly, but these kind of things can be such a drag when you don’t pay attention to the details, specially in ruby where it is so easy mess up with simple techniques.&lt;/p&gt;
-
-&lt;p&gt;Oh, regarding that test, I fixed it by removing the caching. It was totally unnecessary for that case. I could have sent the &lt;code&gt;#persisted?&lt;/code&gt; message and check for a false value instead, but I don’t think that’s a good thing, after deleting the oldest post I expect it to be &lt;code&gt;nil&lt;/code&gt; and not to be a reference to a no longer persisted object.&lt;/p&gt;
-
-&lt;p&gt;That’s it, I hope you enjoyed.&lt;/p&gt;
-</description>
+      <description>Today I spent a good amount of time trying to understand why a specific spec was failing. It was a little bit like this (I changed classes/method names for the sake of the example):
+require &#39;spec_helper&#39; RSpec.describe Blog do describe &#39;#delete_oldest_post&#39; do it &amp;quot;deletes the blog&#39;s oldest post&amp;quot; do blog = FactoryGirl.create(:blog) oldest_post = FactoryGirl.create(:post, created_at: Time.zone.now - 1.year) blog.posts &amp;lt;&amp;lt; oldest_post expect { blog.delete_oldest_post } .to change { blog.oldest_post } .</description>
     </item>
     
     <item>
@@ -133,37 +38,9 @@ blog.oldest_post
       <pubDate>Wed, 22 Feb 2017 11:37:48 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/easy-copying-files-path-using-vim/</guid>
-      <description>&lt;p&gt;Sometimes I need to copy the current file’s relative path to the main register (Cmd+C). Luckily Vim has a nice command that returns it:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;expand(&amp;quot;%&amp;quot;)
-&amp;quot; =&amp;gt; current_project/path/to/file.rb
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It also has a command that returns the current line your cursor is at: &lt;code&gt;line(&amp;quot;.&amp;quot;)&lt;/code&gt;, and of course you can use both commands at the same time:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; use . to concatenate things
-expand(&amp;quot;%&amp;quot;) . &amp;quot;:&amp;quot; . line(&amp;quot;.&amp;quot;)
-&amp;quot; =&amp;gt; current_project/path/to/file.rb:42
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Alright, cool, that helps, but now what?&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Now you can add that output to your main register (in OSX), which can be achieved using &lt;code&gt;@+&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;:let @+ = expand(&amp;quot;%&amp;quot;) . &amp;quot;:&amp;quot; . line(&amp;quot;.&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It wouldn’t be a vim post without creating a new shortcut, am I right? I personally like to have both options, one with the line number at the end and the other without it.&lt;/p&gt;
-
-&lt;p&gt;In my &lt;code&gt;.vimrc&lt;/code&gt; file I mapped those to  &lt;code&gt;leader + C&lt;/code&gt; and  &lt;code&gt;leader + c&lt;/code&gt; .&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Copy relative path to clipboard
-nnoremap &amp;lt;silent&amp;gt; &amp;lt;Leader&amp;gt;c :let @+ = expand(&amp;quot;%&amp;quot;)&amp;lt;CR&amp;gt;
-nnoremap &amp;lt;silent&amp;gt; &amp;lt;Leader&amp;gt;C :let @+ = expand(&amp;quot;%&amp;quot;) . &amp;quot;:&amp;quot; . line(&amp;quot;.&amp;quot;)&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;That&amp;rsquo;s it, I hope you enjoyed.&lt;/p&gt;
-</description>
+      <description>Sometimes I need to copy the current file’s relative path to the main register (Cmd+C). Luckily Vim has a nice command that returns it:
+expand(&amp;quot;%&amp;quot;) &amp;quot; =&amp;gt; current_project/path/to/file.rb  It also has a command that returns the current line your cursor is at: line(&amp;quot;.&amp;quot;), and of course you can use both commands at the same time:
+&amp;quot; use . to concatenate things expand(&amp;quot;%&amp;quot;) . &amp;quot;:&amp;quot; . line(&amp;quot;.&amp;quot;) &amp;quot; =&amp;gt; current_project/path/to/file.rb:42  Alright, cool, that helps, but now what?</description>
     </item>
     
     <item>
@@ -172,16 +49,8 @@ nnoremap &amp;lt;silent&amp;gt; &amp;lt;Leader&amp;gt;C :let @+ = expand(&amp;qu
       <pubDate>Mon, 20 Feb 2017 20:40:55 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/write-something-everyday/</guid>
-      <description>&lt;p&gt;After watching &lt;a href=&#34;http://www.imdb.com/title/tt6397576/?ref_=ttep_ep&#34;&gt;Abstract’s first episode&lt;/a&gt; (which I really recommend) there was something stuck in my head. In the episode Christoph says that he creates something everyday. It doesn’t matter if it’s good or bad, if it will be used later or not. But he needs to do so in order to make things happen, in order to create something.&lt;/p&gt;
-
-&lt;p&gt;When I was very young I thought I was going to be a designer. I don’t know, working with images, movies, 3D animation and all these kind of things&amp;hellip; Maybe because I was so addicted to video games, I dreamt about making that my 9-to-5.&lt;/p&gt;
-
-&lt;p&gt;Suddenly I realized I wasn’t creative. I just couldn’t have the insight, I couldn’t create anything outta my head. Of course I was young and naive, but still, I was left with the impression that &lt;em&gt;I’m not creative&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Later I learned how to code and I knew right on what &lt;em&gt;I was going to be when I grow up&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;So after this digression, I just want to say I’m going to try to write something everyday. Doesn’t matter if it’s good or not, if it’s short or not, I will just put it out there. This is the first try, things start here.&lt;/p&gt;
-</description>
+      <description>After watching Abstract’s first episode (which I really recommend) there was something stuck in my head. In the episode Christoph says that he creates something everyday. It doesn’t matter if it’s good or bad, if it will be used later or not. But he needs to do so in order to make things happen, in order to create something.
+When I was very young I thought I was going to be a designer.</description>
     </item>
     
     <item>
@@ -190,67 +59,8 @@ nnoremap &amp;lt;silent&amp;gt; &amp;lt;Leader&amp;gt;C :let @+ = expand(&amp;qu
       <pubDate>Mon, 28 Nov 2016 21:07:55 -0200</pubDate>
       
       <guid>http://www.leidemer.com/blog/farewell-twitter/</guid>
-      <description>
-
-&lt;p&gt;It was 2007 when I first used Twitter. No one really cared, and nobody that I knew was using. I remember my friends mocking at me, saying it was just another &lt;em&gt;hipster&lt;/em&gt; thing I came up with. For my surprise, Twitter grew way more than I expected, becoming one of the biggest social networks of all time.&lt;/p&gt;
-
-&lt;p&gt;I use Twitter a &lt;strong&gt;lot&lt;/strong&gt;. It is my main source of resourceful links and news. I&amp;rsquo;m always aware of a new JS framework I will never use, that new startup that just got IPO&amp;rsquo;d (I wonder if they use that new framework, or maybe they created it?).&lt;/p&gt;
-
-&lt;p&gt;Also, the latest memes (if you&amp;rsquo;re not from Brazil, you have no idea how much we care about it). I know a good portion of them.&lt;/p&gt;
-
-&lt;p&gt;Oh, I can&amp;rsquo;t forget the news. Things are on fire in South America, and the political scene here is just crazy. I remember I didn&amp;rsquo;t know how to explain to my american friends what was really going on.&lt;/p&gt;
-
-&lt;p&gt;All jokes aside, this list summarizes what I see on my timeline everyday:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Ruby/JS news&lt;/li&gt;
-&lt;li&gt;Music news&lt;/li&gt;
-&lt;li&gt;Local news (mostly about death and political scandals)&lt;/li&gt;
-&lt;li&gt;Traffic reports&lt;/li&gt;
-&lt;li&gt;Memes&lt;/li&gt;
-&lt;li&gt;Sports&lt;/li&gt;
-&lt;li&gt;Memes about sports (soccer, of course)&lt;/li&gt;
-&lt;li&gt;Coding &lt;em&gt;celebrities&lt;/em&gt; ranting about something&lt;/li&gt;
-&lt;li&gt;Friends twitting random stuff&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;From this list, what I really care about are number #1 and #2. It is also nice to know what&amp;rsquo;s going around. But&lt;/p&gt;
-
-&lt;h2 id=&#34;time-to-go-away&#34;&gt;Time to go away&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;m so addicted to it I am accessing it without even noticing.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Waiting for a build to finish? Twitter.com&lt;/li&gt;
-&lt;li&gt;One of coworkers is taking long to answer me back? Cmd + T www.twitter.com&lt;/li&gt;
-&lt;li&gt;My mind just idled? Yeah, you get it&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;On top of all that, for some reason Twitter makes me feel anxious (&lt;a href=&#34;https://en.wikipedia.org/wiki/Fear_of_missing_out&#34;&gt;&lt;em&gt;fear of missing out?&lt;/em&gt;&lt;/a&gt;), and, right now, it is doing more bad than good.&lt;/p&gt;
-
-&lt;p&gt;So, yeah, after thinking a little about it, I decided to take some time off of Twitter. Don&amp;rsquo;t know for how long, but I will continue to use it to share interesting content I find on the internet. I will not spend precious time browsing my timeline, though.&lt;/p&gt;
-
-&lt;h2 id=&#34;staying-up-to-date&#34;&gt;Staying up to date&lt;/h2&gt;
-
-&lt;p&gt;Still, as a developer, I need to know what&amp;rsquo;s going on in the community. But, for my surprise, we have some great resources to keep up to date:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;refind.com&#34;&gt;Refind&lt;/a&gt;: &lt;em&gt;Refind is the home for the best links on the web. Discover and save what matters most to you.&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;rubyflow.com&#34;&gt;Rubyflow&lt;/a&gt;: &lt;em&gt;Made a library? Written a blog post? Found a useful tutorial? Share it with the Ruby community here or just enjoy what everyone else has found!&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;cooperpress.com&#34;&gt;Cooperpress&lt;/a&gt;: &lt;em&gt;Cooperpress publishes weekly email newsletters to an audience of over 300,000 developers and software engineers.&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;getpocket.com&#34;&gt;Pocket&lt;/a&gt;: &lt;em&gt;When you find something you want to view later, put it in Pocket.&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;All of these sites will help you to stay up to date with what &lt;strong&gt;really matters&lt;/strong&gt; to you.&lt;/p&gt;
-
-&lt;h2 id=&#34;wrapping-up&#34;&gt;Wrapping up&lt;/h2&gt;
-
-&lt;p&gt;Twitter is not evil, it is the best social media that exists (tho I really like Last.fm).&lt;/p&gt;
-
-&lt;p&gt;Instead of chasing the information, make it be delivered to you&lt;/p&gt;
-
-&lt;p&gt;Cheers.&lt;/p&gt;
-</description>
+      <description>It was 2007 when I first used Twitter. No one really cared, and nobody that I knew was using. I remember my friends mocking at me, saying it was just another hipster thing I came up with. For my surprise, Twitter grew way more than I expected, becoming one of the biggest social networks of all time.
+I use Twitter a lot. It is my main source of resourceful links and news.</description>
     </item>
     
     <item>
@@ -259,23 +69,9 @@ nnoremap &amp;lt;silent&amp;gt; &amp;lt;Leader&amp;gt;C :let @+ = expand(&amp;qu
       <pubDate>Mon, 19 Sep 2016 21:15:57 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/trying-to-get-back-on-tract-redux/</guid>
-      <description>&lt;p&gt;It has been a while since I blogged. For some reason I just can&amp;rsquo;t find the time, or motivation, to start writing something useful. More than once it feels like I have nothing to say at all.&lt;/p&gt;
-
-&lt;p&gt;I found a lot of excuses to not write. My favorite is not being able to find a good blog engine. I&amp;rsquo;ve been searching for quite some time for the perfect one.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://jekyllrb.com&#34;&gt;Jekyll&lt;/a&gt; is awesome, but I don&amp;rsquo;t wanna spend time tailoring it, but I also don&amp;rsquo;t like any layout I found out there;&lt;/li&gt;
-&lt;li&gt;The same happens for &lt;a href=&#34;https://hexo.io&#34;&gt;Hexo&lt;/a&gt;;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://wordpress.com&#34;&gt;Wordpress&lt;/a&gt; never sounded appealing to me;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://medium.com/&#34;&gt;Medium&lt;/a&gt; seems like a good option, but for some reason I don&amp;rsquo;t feel like writing code stuff there;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;But I finally came across &lt;a href=&#34;http://gohugo.io/&#34;&gt;Gohugo&lt;/a&gt; and its beautiful &lt;a href=&#34;https://github.com/nishanths/cocoa-hugo-theme&#34;&gt;cocoa theme&lt;/a&gt;. I guess my excuses are gone for real. No more messing around, let&amp;rsquo;s get this started.&lt;/p&gt;
-
-&lt;p&gt;I will redirect &lt;a href=&#34;http://leidemer.com&#34;&gt;leidemer.com&lt;/a&gt; to this repository and it will be my main website.&lt;/p&gt;
-
-&lt;p&gt;Onward!&lt;/p&gt;
-</description>
+      <description>It has been a while since I blogged. For some reason I just can&amp;rsquo;t find the time, or motivation, to start writing something useful. More than once it feels like I have nothing to say at all.
+I found a lot of excuses to not write. My favorite is not being able to find a good blog engine. I&amp;rsquo;ve been searching for quite some time for the perfect one.
+ Jekyll is awesome, but I don&amp;rsquo;t wanna spend time tailoring it, but I also don&amp;rsquo;t like any layout I found out there; The same happens for Hexo; Wordpress never sounded appealing to me; Medium seems like a good option, but for some reason I don&amp;rsquo;t feel like writing code stuff there;  But I finally came across Gohugo and its beautiful cocoa theme.</description>
     </item>
     
     <item>
@@ -284,39 +80,8 @@ nnoremap &amp;lt;silent&amp;gt; &amp;lt;Leader&amp;gt;C :let @+ = expand(&amp;qu
       <pubDate>Sat, 27 Sep 2014 21:13:48 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/implementando-lazy-initialization/</guid>
-      <description>&lt;p&gt;&lt;em&gt;In computer programming, lazy initialization is the tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed.&lt;/em&gt; &lt;a href=&#34;http://en.wikipedia.org/wiki/Lazy_initialization&#34;&gt;Wikipédia&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Inspirado pelo ótimo &lt;a href=&#34;http://patshaughnessy.net/2014/9/17/20000-leagues-under-activerecord&#34;&gt;20,000 Leagues Under ActiveRecord&lt;/a&gt;, decidi tentar implementar uma classe que utiliza a tática de &lt;em&gt;lazy initialization&lt;/em&gt; para postergar um processamento, teoricamente, custoso. A idéia, tal qual acontece com o ActiveRecord (explicado no post linkado) é ir adicionando condições à um objeto para, posteriormente, executar uma tarefa.&lt;/p&gt;
-
-&lt;p&gt;Para exemplificar, criei a &lt;a href=&#34;https://github.com/matiasleidemer/lazy_calculator&#34;&gt;LazyCalculator&lt;/a&gt;. Uma calculatora que armazena as condições (por hora, apenas adição e subtração) e, quando solicitada, calcula o resultado.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require_relative &amp;quot;lazy_calculator&amp;quot;
-
-calculator = LazyCalculator.new
-=&amp;gt; #&amp;lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[], @operations=[]&amp;gt;
-
-calculator.plus(5)
-=&amp;gt; #&amp;lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[5], @operations=[:+]&amp;gt;
-
-calculator.minus(2)
-=&amp;gt; #&amp;lt;LazyCalculator:0x007fbbe31a7ee8 @numbers=[5, 2], @operations=[:+, :-]&amp;gt;
-
-irb(main):006:0&amp;gt; calculator.calc
-=&amp;gt; 3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Obviamente a complexidade da LazyCalculator nem se compara com a do ActiveRecord. Mas acho que a idéia fica bem clara nos exemplos acima. Observe que os métodos &lt;code&gt;plus&lt;/code&gt; e &lt;code&gt;minus&lt;/code&gt; retornam a instância do própria objeto. Isso possibilita o encadeamento de vários métodos (method chaining):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;calculator = LazyCalculator.new
-
-calculator.plus(5).minus(1).minus(9).plus(1).calc
-=&amp;gt; -3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Também fica bem claro como o método &lt;code&gt;calc&lt;/code&gt; é postergado até o momento em que é realmente necessário. Quando executado, ele verifica os valores e operações que já existem no objeto atual e realiza o cálculo.&lt;/p&gt;
-
-&lt;p&gt;Eu já havia observado esse comportamento no ActiveRecord, mas ainda não havia tirado um tempo para dar uma olhada com mais calma. Esse tipo de solução me agrada, simples e efetiva, utilize em seu código sempre que parecer conveniente.&lt;/p&gt;
-</description>
+      <description>In computer programming, lazy initialization is the tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed. Wikipédia.
+Inspirado pelo ótimo 20,000 Leagues Under ActiveRecord, decidi tentar implementar uma classe que utiliza a tática de lazy initialization para postergar um processamento, teoricamente, custoso. A idéia, tal qual acontece com o ActiveRecord (explicado no post linkado) é ir adicionando condições à um objeto para, posteriormente, executar uma tarefa.</description>
     </item>
     
     <item>
@@ -325,18 +90,8 @@ calculator.plus(5).minus(1).minus(9).plus(1).calc
       <pubDate>Tue, 23 Sep 2014 21:11:24 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/resolvendo-problemas-com-acentos-em-ruby/</guid>
-      <description>&lt;p&gt;Lembro que a um tempo atrás eu fiz uma clean install do Mavericks no meu Macbook e tive alguns problemas chatos quanto acentuação em ruby. Sempre que eu tentava utilizar &lt;em&gt;ç&lt;/em&gt; ou &lt;em&gt;ã&lt;/em&gt;, por exemplo, tinha como retorno um caracter estranho ou mesmo uma quebra de linha.&lt;/p&gt;
-
-&lt;p&gt;Apesar de parecer, não era o caso de colocar o &lt;code&gt;encoding: utf-8&lt;/code&gt; no header do arquivo, já que o problema acontecia mesmo nas versões &amp;gt; 1.9.&lt;/p&gt;
-
-&lt;p&gt;Depois de muito quebrar a cabeça, verificar que o &lt;a href=&#34;http://blog.rlmflores.me/blog/2012/04/25/adding-utf-8-support-to-rubies-compiled-through-ruby-build/&#34;&gt;rbenv e ruby build estavam configurados corretamente para instalar com suporte a UTF-8&lt;/a&gt;, acabei descobrindo que o que eu realmente precisava configurar era o ambiente shell do Mavericks, e não o ruby em si.&lt;/p&gt;
-
-&lt;p&gt;Configurar as variáveis de &lt;a href=&#34;https://www.gnu.org/savannah-checkouts/gnu/libc/manual/html_node/Locale-Categories.html&#34;&gt;Locale Categories&lt;/a&gt; finalmente resolveu meu problema. Basta adicionar a linha abaixo no &lt;code&gt;.bash_profile&lt;/code&gt; ou em outro arquivo de configuração equivalente.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# na dúvida usei o macro LC_ALL e já deixei tudo com en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Lembro que a um tempo atrás eu fiz uma clean install do Mavericks no meu Macbook e tive alguns problemas chatos quanto acentuação em ruby. Sempre que eu tentava utilizar ç ou ã, por exemplo, tinha como retorno um caracter estranho ou mesmo uma quebra de linha.
+Apesar de parecer, não era o caso de colocar o encoding: utf-8 no header do arquivo, já que o problema acontecia mesmo nas versões &amp;gt; 1.</description>
     </item>
     
     <item>
@@ -345,28 +100,9 @@ export LC_ALL=en_US.UTF-8
       <pubDate>Mon, 15 Sep 2014 21:02:55 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/review-practical-object-oriented-design-in-ruby/</guid>
-      <description>&lt;p&gt;Não vou começar esse post dizendo que adoro ler livros técnicos. &lt;a href=&#34;http://www.goodreads.com/review/list/12920420-matias-leidemer?shelf=read&#34;&gt;Eu não gosto&lt;/a&gt;. Não consigo me lembrar de outros livros da mesma categoria que consegui ler até o fim.&lt;/p&gt;
-
-&lt;p&gt;Existe alguma coisa sobre o &lt;a href=&#34;http://www.poodr.com/&#34;&gt;POODR&lt;/a&gt; que o deixa diferente.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://twitter.com/sandimetz&#34;&gt;Sandi Metz&lt;/a&gt; fez um trabalho impecável aqui. A maneira como ela conduz a narrativa, como ela te faz pensar sobre os conceitos, é impressionante. Conceitos, estes, que você achava que sabia&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;O que mais me chamout atenção sobre o livro é como ele me ensinou que eu &lt;em&gt;não sei orientação a objetos&lt;/em&gt;. Ou, pelo menos, que eu sei menos do que eu achava que eu sabia. Um pouco chocante? Talvez. Mas necessário.&lt;/p&gt;
-
-&lt;p&gt;Durante o livro a autora apresenta um caso de uso relacionado à uma empresa que planeja viagens de bicicleta (esqueci o nome da empresa fictícia, depois atualizo o post). Os exemplos de código vão desde a modelagem de bicicletas (usando herança e depois &lt;em&gt;composition&lt;/em&gt;) em si, bem como agendamento de &lt;em&gt;trips&lt;/em&gt; com diferentes papéis (mecânico, motorista, etc) envolvidos.&lt;/p&gt;
-
-&lt;p&gt;Lembro bem de um caso em que ela indica que a estrutura das classes pode melhorar e eu simplemente não conseguia imaginar como isso poderia acontecer&amp;hellip; Logo depois de ler mais dois parágrafos e mais um snippet de código, tudo fez sentido.&lt;/p&gt;
-
-&lt;p&gt;Espere por muito conceito. A leitura é intensa, não deixe isso lhe desanimar. Sandi não exibe somente &lt;em&gt;code snippets&lt;/em&gt; com soluções e alternativas para problemas, mas ela explica muito bem o por que de tais escolhas e como isso diminui o &lt;strong&gt;custo de manutenção&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;O último capítulo, sobre testes, foi um dos que mais aproveitei. Novos posts virão por conta disso.&lt;/p&gt;
-
-&lt;p&gt;No fim das contas, &lt;em&gt;Practical Object-Oriented Design in Ruby&lt;/em&gt; é um livro &lt;strong&gt;obrigatório&lt;/strong&gt; para qualquer programador ruby (ou qualquer outra linguagem &lt;em&gt;dynamic typing&lt;/em&gt;) experiente ou não.&lt;/p&gt;
-
-&lt;p&gt;Lançado em 2012, é o único livro com &lt;a href=&#34;http://www.amazon.com/Practical-Object-Oriented-Design-Ruby-Addison-Wesley/dp/0321721330/ref=zg_bs_6134006011_3&#34;&gt;5 estrelas entre os best sellers de ruby na Amazon&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;LEIA!&lt;/strong&gt;&lt;/p&gt;
-</description>
+      <description>Não vou começar esse post dizendo que adoro ler livros técnicos. Eu não gosto. Não consigo me lembrar de outros livros da mesma categoria que consegui ler até o fim.
+Existe alguma coisa sobre o POODR que o deixa diferente.
+Sandi Metz fez um trabalho impecável aqui. A maneira como ela conduz a narrativa, como ela te faz pensar sobre os conceitos, é impressionante. Conceitos, estes, que você achava que sabia&amp;hellip;</description>
     </item>
     
     <item>
@@ -375,57 +111,8 @@ export LC_ALL=en_US.UTF-8
       <pubDate>Wed, 10 Sep 2014 19:52:41 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/se-divertindo-com-o-m%C3%A9todo-transpose/</guid>
-      <description>&lt;p&gt;Embora eu tenha usado poucas vezes, o método &lt;a href=&#34;http://http://www.ruby-doc.org/core-2.1.2/Array.html#method-i-transpose&#34;&gt;Array#transpose&lt;/a&gt; do ruby é muito interessante. Dependendo da sua forma de uso, pode apresentar soluções muito poderosas.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;names = %w(matias jose mateus)
-# =&amp;gt; [&amp;quot;matias&amp;quot;, &amp;quot;jose&amp;quot;, &amp;quot;mateus&amp;quot;]
-
-last_names = %w(leidemer gomes lorandi)
-# =&amp;gt; [&amp;quot;leidemer&amp;quot;, &amp;quot;gomes&amp;quot;, &amp;quot;lorandi&amp;quot;]
-
-[names, last_names].transpose
-# =&amp;gt; [[&amp;quot;matias&amp;quot;, &amp;quot;leidemer&amp;quot;], [&amp;quot;jose&amp;quot;, &amp;quot;gomes&amp;quot;], [&amp;quot;mateus&amp;quot;, &amp;quot;lorandi&amp;quot;]]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Neste exemplo, o método &lt;em&gt;junta&lt;/em&gt; os primeiros nomes definidos em &lt;code&gt;names&lt;/code&gt; junto com os sobrenomes definidos em &lt;code&gt;last_names&lt;/code&gt;, baseado nos índices de cada nome/sobrenome.&lt;/p&gt;
-
-&lt;p&gt;Usando o construtor do &lt;a href=&#34;http://www.ruby-doc.org/core-2.1.2/Hash.html#method-c-5B-5D&#34;&gt;Hash&lt;/a&gt;, podemos criar uma estrutura ainda mais interessante:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;result = [names, last_names].transpose
-# =&amp;gt; [[&amp;quot;matias&amp;quot;, &amp;quot;leidemer&amp;quot;], [&amp;quot;jose&amp;quot;, &amp;quot;gomes&amp;quot;], [&amp;quot;mateus&amp;quot;, &amp;quot;lorandi&amp;quot;]]
-
-Hash[result]
-# =&amp;gt; {&amp;quot;matias&amp;quot;=&amp;gt;&amp;quot;leidemer&amp;quot;, &amp;quot;jose&amp;quot;=&amp;gt;&amp;quot;gomes&amp;quot;, &amp;quot;mateus&amp;quot;=&amp;gt;&amp;quot;lorandi&amp;quot;}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A utilização faz mais sentido quando você possui uma coleção de dados e precisa, por exemplo, identificar cada tipo de dado. Aqui, com o uso da classe &lt;a href=&#34;http://www.ruby-doc.org/stdlib-2.0/libdoc/ostruct/rdoc/OpenStruct.html&#34;&gt;OpenStruct&lt;/a&gt;, fica fácil de criar uma estrutura.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;ostruct&#39;
-
-columns = %w(title description published_at)
-# =&amp;gt; [&amp;quot;title&amp;quot;, &amp;quot;description&amp;quot;, &amp;quot;published_at&amp;quot;]
-
-data = [&amp;quot;Super Post&amp;quot;, &amp;quot;Big description here&amp;quot;, Date.new(2014, 5, 8)]
-# =&amp;gt; [&amp;quot;Super Post&amp;quot;, &amp;quot;Big description here&amp;quot;, 2014-05-08 00:00:00 -0300]
-
-hash = Hash[[columns, data].transpose]
-# =&amp;gt; {&amp;quot;title&amp;quot;=&amp;gt;&amp;quot;Super Post&amp;quot;, &amp;quot;description&amp;quot;=&amp;gt;&amp;quot;Big description here&amp;quot;, &amp;quot;published_at&amp;quot;=&amp;gt;2014-05-08 00:00:00 -0300}
-
-blog = OpenStruct.new hash
-# =&amp;gt; #&amp;lt;OpenStruct title=&amp;quot;Super Post&amp;quot;, description=&amp;quot;Big description here&amp;quot;, published_at=2014-05-08 00:00:00 -0300&amp;gt;
-
-blog.title
-# =&amp;gt; &amp;quot;Super Post&amp;quot;
-
-blog.description
-# =&amp;gt; &amp;quot;Big description here&amp;quot;
-
-blog.published_at
-# =&amp;gt; 2014-05-08 00:00:00 -0300
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Lots of fun.&lt;/p&gt;
-</description>
+      <description>Embora eu tenha usado poucas vezes, o método Array#transpose do ruby é muito interessante. Dependendo da sua forma de uso, pode apresentar soluções muito poderosas.
+names = %w(matias jose mateus) # =&amp;gt; [&amp;quot;matias&amp;quot;, &amp;quot;jose&amp;quot;, &amp;quot;mateus&amp;quot;] last_names = %w(leidemer gomes lorandi) # =&amp;gt; [&amp;quot;leidemer&amp;quot;, &amp;quot;gomes&amp;quot;, &amp;quot;lorandi&amp;quot;] [names, last_names].transpose # =&amp;gt; [[&amp;quot;matias&amp;quot;, &amp;quot;leidemer&amp;quot;], [&amp;quot;jose&amp;quot;, &amp;quot;gomes&amp;quot;], [&amp;quot;mateus&amp;quot;, &amp;quot;lorandi&amp;quot;]]  Neste exemplo, o método junta os primeiros nomes definidos em names junto com os sobrenomes definidos em last_names, baseado nos índices de cada nome/sobrenome.</description>
     </item>
     
     <item>
@@ -434,78 +121,10 @@ blog.published_at
       <pubDate>Tue, 31 Dec 2013 19:46:08 -0300</pubDate>
       
       <guid>http://www.leidemer.com/blog/instalando-postgresql-no-mavericks/</guid>
-      <description>
-
-&lt;p&gt;Aproveitando o fim de ano, decidi realizar uma &lt;em&gt;fresh install&lt;/em&gt; do Mavericks no meu Macbook.&lt;/p&gt;
-
-&lt;p&gt;Enquanto instalava minhas ferramentas de trabalho, tive um pouco de dificuldade para instalar o PostgreSQL. Não lembro exatamente como havia feito anteriormente, por isso decidi escrever aqui como foi o processo dessa vez.&lt;/p&gt;
-
-&lt;h3 id=&#34;homebrew&#34;&gt;Homebrew&lt;/h3&gt;
-
-&lt;p&gt;Bom, (quase) tudo que instalo no Mac, faço através do &lt;a href=&#34;http://brew.sh/&#34;&gt;homebrew&lt;/a&gt;. Se você ainda não usa, deveria.&lt;/p&gt;
-
-&lt;p&gt;A instalação do homebrew deve ocorrer normalmente, sua página contém bastante informação caso ocorra algum problema. Após a instalação, chegou a hora de instalar o nosso querido banco de dados. Através do homebrew, fica fácil de achar e instalar:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# podemos começar pesquisando pelas &amp;quot;formulas&amp;quot; disponíveis no homebrew:
-
-$ brew search postgres
-postgres-xc  postgresql
-homebrew/versions/postgresql8	  homebrew/versions/postgresql9	    homebrew/versions/postgresql91    homebrew/versions/postgresql92
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Entre as várias fórmulas disponíveis, a que queremos é a &lt;code&gt;postgresql&lt;/code&gt; mesmo. Para termos certeza do que se trata, basta rodar o comando &lt;code&gt;info&lt;/code&gt; do homebrew:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ brew info postgresql
-postgresql: stable 9.3.2 (bottled)
-http://www.postgresql.org/
-
-# (...) omitindo outras informações
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Uma das vantagens do homebrew, é que as fórmulas podem ser facilmente visualizadas, caso você queira saber o que acontece por trás dos panos. O comando &lt;code&gt;info&lt;/code&gt; retorna aonde está hospedada a fórmula. No caso do postgresql, está &lt;a href=&#34;https://github.com/Homebrew/homebrew/blob/master/Library/Formula/postgresql.rb&#34;&gt;aqui&lt;/a&gt;. No &lt;a href=&#34;https://github.com/Homebrew/homebrew&#34;&gt;Github do homebrew&lt;/a&gt;, é possível ver todas as fórmulas.&lt;/p&gt;
-
-&lt;p&gt;Tudo certo, hora de instalar! Mais uma vez, uma tarefa fácil:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ brew install postgresql
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A instalação deve ocorrer normalmente também, dependendo da configuração da sua máquina, o processo pode demorar alguns minutos.&lt;/p&gt;
-
-&lt;h3 id=&#34;postgresql&#34;&gt;PostgreSQL&lt;/h3&gt;
-
-&lt;p&gt;Após a conclusão da instalação, hora de configurar o postgresql. Não há nada de muito especial, os passos realizados aqui funcionam bem para as minhas necessidades.&lt;/p&gt;
-
-&lt;p&gt;O primeiro passo é setar a variável de ambiente &lt;a href=&#34;http://www.postgresql.org/docs/9.3/static/storage-file-layout.html&#34;&gt;PGDATA&lt;/a&gt;, que contém os arquivos de configuração do cluster do banco. Caso você tenha feito a instalação sem nenhuma configuração adicional, este diretório deve estar em &lt;code&gt;/usr/local/var/postgres&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Adicione a seguinte linha no seu arquivo de configuração de bash: &lt;code&gt;export PGDATA=&amp;quot;/usr/local/var/postgres&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Eu uso o &lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh-my-zsh&lt;/a&gt;, no meu caso o arquivo de configuração fica em &lt;code&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Toda vez que você inicializar o postgres, ele vai procurar por essa variável de ambiente. O comando utilizado para inicializar o banco é &lt;a href=&#34;http://www.postgresql.org/docs/current/static/app-pg-ctl.html&#34;&gt;pg_ctl&lt;/a&gt;. Caso você não tenha configurado a variável de ambiente, é preciso passar a opção -D para o comando:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# inicializa o banco
-pg_ctl start -D /usr/local/var/postgres
-
-# pára o banco
-pg_ctl stop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Por default, o log do servidor será exibido no buffer do seu terminal, uma das maneiras de evitar isso, é indicando um arquivo para o output do log, através da opção -l:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# inicia o banco setando arquivo de log externo
-pg_ctl start -l /usr/local/var/postgres/log
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Por fim, você pode criar aliases para iniciar e parar o servidor. Dentro do seu arquivo de configuração de shell:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;alias postgres_start=&amp;quot;pg_ctl start -l /usr/local/var/postgres/log&amp;quot;
-alias postgres_stop=&amp;quot;pg_ctl stop&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Assim, os comando &lt;code&gt;postgres_start&lt;/code&gt; e &lt;code&gt;postgres_stop&lt;/code&gt; estarão disponíveis em qualquer seção do terminal.&lt;/p&gt;
-
-&lt;p&gt;Sei que ainda existe a opção de inicialização automática do banco, quando você loga no SO, mas, particularmente, não gosto muito deste approach.&lt;/p&gt;
-</description>
+      <description>Aproveitando o fim de ano, decidi realizar uma fresh install do Mavericks no meu Macbook.
+Enquanto instalava minhas ferramentas de trabalho, tive um pouco de dificuldade para instalar o PostgreSQL. Não lembro exatamente como havia feito anteriormente, por isso decidi escrever aqui como foi o processo dessa vez.
+Homebrew Bom, (quase) tudo que instalo no Mac, faço através do homebrew. Se você ainda não usa, deveria.
+A instalação do homebrew deve ocorrer normalmente, sua página contém bastante informação caso ocorra algum problema.</description>
     </item>
     
   </channel>
